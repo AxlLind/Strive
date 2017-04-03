@@ -29,17 +29,18 @@ public class PlayerScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update() {
-	}
+        MovementX();
+    }
 
 	void FixedUpdate() {
-		Gravity();
-		grounded = IsGrounded ();
-		if (grounded) {
-			rb.velocity += new Vector2 (0, -rb.velocity.y);
-		}
-		Jump ();
-		MovementX ();
-	}
+        Gravity();
+        grounded = IsGrounded();
+        if (grounded)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, 0);
+        }
+        Jump();
+    }
 
 	void Gravity() {
 		if (rb.velocity.y < maxFallSpeed) {
@@ -57,7 +58,8 @@ public class PlayerScript : MonoBehaviour {
 	}
 
 	void Jump() {
-		if (Input.GetButtonDown ("Jump") && grounded) {
+        
+        if (Input.GetButtonDown ("Jump") && grounded) {
 			rb.velocity += new Vector2 (0, jumpHeight);
 		} else if (Input.GetButtonUp ("Jump") && rb.velocity.y > 0) {
 			rb.velocity = new Vector2 (rb.velocity.x, rb.velocity.y * 0.5f);
