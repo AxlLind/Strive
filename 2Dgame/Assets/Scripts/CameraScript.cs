@@ -4,18 +4,14 @@ using UnityEngine;
 
 public class CameraScript : MonoBehaviour {
 
-	public Transform player;
+	public float scrollSpeed;
+	Transform transform;
 
-	public float lerpSpeed;
-
-	// Use this for initialization
-	void Start () {
-		
+	void Awake() {
+		transform = GetComponent<Transform> ();
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		Vector2 lerpthingy = Vector2.Lerp (transform.position, player.position, lerpSpeed);
-		transform.position = new Vector3(lerpthingy.x, lerpthingy.y, transform.position.z);
+
+	void Update() {
+		transform.position = new Vector3 (transform.position.x, transform.position.y + scrollSpeed, transform.position.z);
 	}
 }

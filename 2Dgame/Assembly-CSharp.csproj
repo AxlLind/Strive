@@ -47,6 +47,9 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\CameraScript.cs" />
+     <Compile Include="Assets\Scripts\DeathByContactScript.cs" />
+     <Compile Include="Assets\Scripts\PlatformScript.cs" />
+     <Compile Include="Assets\Scripts\PlatformSpawnerScript.cs" />
      <Compile Include="Assets\Scripts\PlayerScipt.cs" />
  <Reference Include="UnityEngine.Analytics">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
