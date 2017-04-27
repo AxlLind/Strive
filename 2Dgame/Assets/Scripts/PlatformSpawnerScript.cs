@@ -5,7 +5,8 @@ using UnityEngine;
 public class PlatformSpawnerScript : MonoBehaviour {
 
 	float yPosAtLastSpawn;
-	float distanceBetween = 3f;
+	float distanceBetween = 3.2f;
+	bool lastWasHard = false;
 
 	public GameObject platformPrefab;
 	public Transform platformParent;
@@ -23,8 +24,23 @@ public class PlatformSpawnerScript : MonoBehaviour {
 	}
 
 	void spawnPlatform() {
-		Vector2 pos = new Vector2(2 * Random.Range(-3, 4), transform.position.y);
+		Vector2 pos = new Vector2(correctX(), transform.position.y);
 		GameObject go = Instantiate (platformPrefab, pos, Quaternion.identity);
 		go.transform.parent = platformParent;
+	}
+
+	int correctX() {
+		// Makes sure that two platforms cant be at opposite edge in a row
+		int x = 2 * Random.Range (-3, 4);
+		if (x == -6 || x == 6) {
+			if (lastWasHard) {
+				x = 2 * Random.Range (-2, 3);
+				lastWasHard = false;
+			} else {
+				lastWasHard = true;
+			}
+		}
+		Debug.Log (x);
+		return x;
 	}
 }
