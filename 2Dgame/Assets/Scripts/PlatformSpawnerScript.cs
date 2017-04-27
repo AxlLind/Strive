@@ -6,7 +6,8 @@ public class PlatformSpawnerScript : MonoBehaviour {
 
 	float yPosAtLastSpawn;
 	float distanceBetween = 3f;
-	public GameObject platform;
+	public GameObject platformPrefab;
+	public Transform platformParent;
 
 	// Use this for initialization
 	void Start () {
@@ -22,6 +23,7 @@ public class PlatformSpawnerScript : MonoBehaviour {
 
 	void spawnPlatform() {
 		Vector2 pos = new Vector2(transform.position.x + Random.Range(-7f, 7f), transform.position.y);
-		Instantiate (platform, pos, Quaternion.identity);
+		GameObject go = Instantiate (platformPrefab, pos, Quaternion.identity);
+		go.transform.parent = platformParent;
 	}
 }

@@ -5,18 +5,23 @@ using UnityEngine;
 public class CameraScript : MonoBehaviour {
 
 	public float standardSpeed = 0.05f;
-	public float scrollSpeed;
-	Transform transform;
+	float scrollSpeed;
 	public Rigidbody2D target;
-
-	void Awake() {
-		transform = GetComponent<Transform> ();
-	}
+	bool startedMoving = false;
 
 	void Update() {
+		if (!startedMoving && target.position.y > 0f) {
+			startedMoving = true;
+		}
+
+		if (startedMoving) {
+			ScrollUp ();
+		}
+	}
+
+	void ScrollUp() {
 		transform.position = new Vector3 (transform.position.x, transform.position.y + scrollSpeed, transform.position.z);
 		if (target.position.y - transform.position.y > 5f) {
-			float t = 0.01f;
 			scrollSpeed = Mathf.Lerp (scrollSpeed, target.velocity.y, 0.001f);
 		} else {
 			scrollSpeed = Mathf.Lerp(scrollSpeed, standardSpeed, 0.2f);

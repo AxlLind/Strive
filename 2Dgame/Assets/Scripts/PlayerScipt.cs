@@ -24,7 +24,8 @@ public class PlayerScipt : MonoBehaviour {
 	}
 
 	void HorizontalMovement() {
-		float h = Input.GetAxis ("Horizontal");
+		//float h = Input.acceleration.x;
+		float h = Input.GetAxis("Horizontal");
 		rb.velocity = new Vector2 (h * horizontalSpeed,rb.velocity.y);
 	}
 
