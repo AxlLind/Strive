@@ -8,7 +8,8 @@ public class PlayerScipt : MonoBehaviour {
 	public float horizontalSpeed;
 	public float jumpSpeed;
 	public float extraGravityDown;
-	public Transform groundCheck;
+	public Transform groundCheckLeft;
+	public Transform groundCheckRight;
 	public bool grounded;
 
 	void Awake () {
@@ -28,14 +29,15 @@ public class PlayerScipt : MonoBehaviour {
 	}
 
 	void Jump() {
-		bool jumped = Input.GetButtonDown ("Jump");
-		if (jumped && grounded) {
+		//bool jumped = Input.GetButtonDown ("Jump"); Now Auto jumping
+		if (rb.velocity.y <= 0 && grounded) {
 			rb.velocity = new Vector2 (rb.velocity.x , jumpSpeed);
 		}
 	}
 
 	bool isGrounded() {
-		return Physics2D.Linecast (rb.position, groundCheck.position);
+		return Physics2D.Linecast (rb.position, groundCheckLeft.position)
+			|| Physics2D.Linecast (rb.position, groundCheckRight.position);
 	}
 
 	void ExtraGravityDown() {

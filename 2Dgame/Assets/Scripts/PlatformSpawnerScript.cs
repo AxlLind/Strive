@@ -4,20 +4,24 @@ using UnityEngine;
 
 public class PlatformSpawnerScript : MonoBehaviour {
 
-	float spawnDelay = 1f;
+	float yPosAtLastSpawn;
+	float distanceBetween = 3f;
 	public GameObject platform;
 
 	// Use this for initialization
 	void Start () {
-		StartCoroutine( spawnPlatform ());
 	}
 
-	IEnumerator spawnPlatform() {
-		while (true) {
-			Vector2 cameraPos = Camera.main.transform.position;
-			Vector2 pos = new Vector2 (cameraPos.x + Random.Range(-8.5f, 8.5f), cameraPos.y + 8);
-			Instantiate (platform, pos, Quaternion.identity);
-			yield return new WaitForSeconds (spawnDelay);
+	void Update() {
+		float y = Camera.main.transform.position.y;
+		if (y - yPosAtLastSpawn > distanceBetween) {
+			spawnPlatform ();
+			yPosAtLastSpawn = y;
 		}
+	}
+
+	void spawnPlatform() {
+		Vector2 pos = new Vector2(transform.position.x + Random.Range(-7f, 7f), transform.position.y);
+		Instantiate (platform, pos, Quaternion.identity);
 	}
 }
