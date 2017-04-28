@@ -8,6 +8,6 @@ public class DeathByContactScript : MonoBehaviour {
 	void OnCollisionEnter2D(Collision2D other) {
 		// Called when player loses:
 		// TODO: Implement losing condition.
-		SceneManager.LoadScene("Level 1");
+		SceneManager.LoadScene("Main_Game");
 	}
 }

@@ -25,16 +25,16 @@ public class PlayerScipt : MonoBehaviour {
 
 
 	void HorizontalMovement() {
-		//float 	h = Input.acceleration.x;
+		//float h = 10f * Input.acceleration.x;
 		float h = Input.GetAxis("Horizontal");
 		rb.velocity = new Vector2 (h * horizontalSpeed,rb.velocity.y);
-		//KeepOnScreen ();
+		KeepOnScreen ();
 	}
 
 	void KeepOnScreen() {
 		// TODO: Make this better maybe?
-		float max = 7.7f;
-		rb.position = new Vector2 (Mathf.Clamp (rb.position.x, -max, max), rb.position.y);
+		float xMax = 7.5f;
+		rb.position = new Vector2(Mathf.Clamp(rb.position.x, -xMax, xMax), rb.position.y);
 	}
 
 	void Jump() {
