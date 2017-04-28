@@ -2,18 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameControllerScript : MonoBehaviour {
 
 	public static bool isPaused = false;
 	public Button pauseButton;
+	public Button restartButton;
+	public Button startScreenButton;
 	public Text scoreText;
 	public Rigidbody2D playerRB;
-	Vector2 playerSpeedAtPause;
 	int score;
 
 	void Start() {
-		pauseButton.onClick.AddListener (OnClickPause);
+		pauseButton.onClick.AddListener (PauseUnPauseGame);
+		restartButton.onClick.AddListener (OnClickRestart);
+		startScreenButton.onClick.AddListener (OnClickStartScreen);
 	}
 
 	void Update () {
@@ -28,13 +32,19 @@ public class GameControllerScript : MonoBehaviour {
 		scoreText.text = "Score: " + score;
 	}
 
-	void OnClickPause() {
+	public void PauseUnPauseGame() {
 		isPaused = !isPaused;
-		playerRB.simulated = !playerRB.simulated;
-		if (!isPaused) {
-			playerRB.velocity = playerSpeedAtPause;
-		} else {
-			playerSpeedAtPause = playerRB.velocity;
-		}
+		playerRB.simulated = isPaused ? false : true;
+
+	}
+
+	void OnClickRestart() {
+		isPaused = false;
+		SceneManager.LoadScene ("Main_Game");
+	}
+
+	void OnClickStartScreen() {
+		isPaused = false;
+		SceneManager.LoadScene ("Start_Screen");
 	}
 }

@@ -3,11 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlatformScript : MonoBehaviour {
-	// Use this for initialization
-	void Awake () {
-	}
 	
-	// Update is called once per frame
 	void FixedUpdate () {
 		if (GameControllerScript.isPaused) {
 			return;
@@ -17,4 +13,5 @@ public class PlatformScript : MonoBehaviour {
 			Destroy (this.gameObject);
 		}
 	}
+
 }

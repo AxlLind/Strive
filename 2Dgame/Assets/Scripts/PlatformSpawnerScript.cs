@@ -40,7 +40,6 @@ public class PlatformSpawnerScript : MonoBehaviour {
 				lastWasHard = true;
 			}
 		}
-		Debug.Log (x);
 		return x;
 	}
 }
