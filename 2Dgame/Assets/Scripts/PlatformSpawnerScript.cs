@@ -11,11 +11,11 @@ public class PlatformSpawnerScript : MonoBehaviour {
 	public GameObject platformPrefab;
 	public Transform platformParent;
 
-	// Use this for initialization
-	void Awake () {
-	}
-
 	void Update() {
+		if (GameControllerScript.isPaused) {
+			return;
+		}
+
 		float y = Camera.main.transform.position.y;
 		if (y - yPosAtLastSpawn > distanceBetween) {
 			spawnPlatform ();

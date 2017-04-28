@@ -10,6 +10,9 @@ public class CameraScript : MonoBehaviour {
 	bool startedMoving = false;
 
 	void Update() {
+		if (GameControllerScript.isPaused) {
+			return;
+		}
 		if (!startedMoving && target.position.y > 0f) {
 			startedMoving = true;
 		}

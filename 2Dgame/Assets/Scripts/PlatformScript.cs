@@ -9,6 +9,9 @@ public class PlatformScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void FixedUpdate () {
+		if (GameControllerScript.isPaused) {
+			return;
+		}
 		float diff = Camera.main.transform.position.y - this.transform.position.y;
 		if (diff > 25f) {
 			Destroy (this.gameObject);
