@@ -19,13 +19,22 @@ public class PlayerScipt : MonoBehaviour {
 	void FixedUpdate () {
 		grounded = isGrounded ();
 		ExtraGravityDown ();
-		HorizontalMovement ();
 		Jump ();
+		HorizontalMovement ();
 	}
 
+
 	void HorizontalMovement() {
-		float h = Input.GetAxis ("Horizontal");
+		//float h = 10f * Input.acceleration.x;
+		float h = Input.GetAxis("Horizontal");
 		rb.velocity = new Vector2 (h * horizontalSpeed,rb.velocity.y);
+		KeepOnScreen ();
+	}
+
+	void KeepOnScreen() {
+		// TODO: Make this better maybe?
+		float xMax = 7.5f;
+		rb.position = new Vector2(Mathf.Clamp(rb.position.x, -xMax, xMax), rb.position.y);
 	}
 
 	void Jump() {
