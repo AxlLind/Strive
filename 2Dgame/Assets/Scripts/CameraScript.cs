@@ -16,18 +16,17 @@ public class CameraScript : MonoBehaviour {
 		if (!startedMoving && target.position.y > 0f) {
 			startedMoving = true;
 		}
-
 		if (startedMoving) {
 			ScrollUp ();
 		}
 	}
 
 	void ScrollUp() {
-		transform.position = new Vector3 (transform.position.x, transform.position.y + scrollSpeed, transform.position.z);
+		transform.position = new Vector3 (transform.position.x, transform.position.y + scrollSpeed*Time.deltaTime, transform.position.z);
 		if (target.position.y - transform.position.y > 5f) {
-			scrollSpeed = Mathf.Lerp (scrollSpeed, target.velocity.y, 0.001f);
+			scrollSpeed = Mathf.Lerp (scrollSpeed, target.velocity.y, 0.1f);
 		} else {
-			scrollSpeed = Mathf.Lerp(scrollSpeed, standardSpeed, 0.2f);
+			scrollSpeed = Mathf.Lerp(scrollSpeed, standardSpeed, 2f);
 		}
 	}
 }

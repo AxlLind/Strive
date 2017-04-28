@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class GameControllerScript : MonoBehaviour {
 
-	public static bool isPaused = false;
+	public static bool isPaused;
 	public Button pauseButton;
 	public Button restartButton;
 	public Button startScreenButton;
@@ -15,13 +15,14 @@ public class GameControllerScript : MonoBehaviour {
 	int score;
 
 	void Start() {
+		isPaused = false;
 		pauseButton.onClick.AddListener (PauseUnPauseGame);
 		restartButton.onClick.AddListener (OnClickRestart);
 		startScreenButton.onClick.AddListener (OnClickStartScreen);
 	}
 
 	void Update () {
-		if (GameControllerScript.isPaused) {
+		if (isPaused) {
 			return;
 		}
 		UpdateScore ();
@@ -39,12 +40,10 @@ public class GameControllerScript : MonoBehaviour {
 	}
 
 	void OnClickRestart() {
-		isPaused = false;
 		SceneManager.LoadScene ("Main_Game");
 	}
 
 	void OnClickStartScreen() {
-		isPaused = false;
 		SceneManager.LoadScene ("Start_Screen");
 	}
 }
