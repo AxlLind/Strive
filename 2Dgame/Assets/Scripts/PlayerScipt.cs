@@ -17,6 +17,9 @@ public class PlayerScipt : MonoBehaviour {
 	}
 
 	void FixedUpdate () {
+		if (GameControllerScript.isPaused) {
+			return;
+		}
 		grounded = isGrounded ();
 		ExtraGravityDown ();
 		Jump ();
