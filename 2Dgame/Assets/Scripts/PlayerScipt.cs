@@ -37,8 +37,25 @@ public class PlayerScipt : MonoBehaviour {
 	void KeepOnScreen() {
 		// TODO: Make this better maybe?
 		float xMax = 7.5f;
-		rb.position = new Vector2(Mathf.Clamp(rb.position.x, -xMax, xMax), rb.position.y);
+        // rb.position = new Vector2(Mathf.Clamp(rb.position.x, -xMax, xMax), rb.position.y);
+        SeamlessEdge(xMax);
 	}
+
+    // Method for making the player appear on the other half of the screen
+    void SeamlessEdge(float xMax)
+    {
+        rb.interpolation = RigidbodyInterpolation2D.Extrapolate;
+        float playerHalf = rb.transform.localScale.x / 2;
+
+        if (rb.position.x > xMax + playerHalf)
+        {
+            rb.position = new Vector2((-xMax - playerHalf), rb.position.y);
+        }
+        else if (rb.position.x < -xMax - playerHalf)
+        {
+            rb.position = new Vector2((xMax + playerHalf), rb.position.y);
+        }
+    }
 
 	void Jump() {
 		//bool jumped = Input.GetButtonDown ("Jump"); Now Auto jumping
