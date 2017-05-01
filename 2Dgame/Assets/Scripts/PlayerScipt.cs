@@ -37,8 +37,7 @@ public class PlayerScipt : MonoBehaviour {
 	void KeepOnScreen() {
 		// TODO: Make this better maybe?
 		float xMax = 7.5f;
-        // rb.position = new Vector2(Mathf.Clamp(rb.position.x, -xMax, xMax), rb.position.y);
-        SeamlessEdge(xMax);
+        rb.position = new Vector2(Mathf.Clamp(rb.position.x, -xMax, xMax), rb.position.y);
 	}
 
     // Method for making the player appear on the other half of the screen
@@ -55,6 +54,12 @@ public class PlayerScipt : MonoBehaviour {
         {
             rb.position = new Vector2((xMax + playerHalf), rb.position.y);
         }
+    }
+
+    // Resets to interpolate
+    void SetToInterpolate()
+    {
+        rb.interpolation = RigidbodyInterpolation2D.Interpolate;
     }
 
 	void Jump() {
