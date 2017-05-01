@@ -5,6 +5,8 @@ using UnityEngine;
 public class PlayerScipt : MonoBehaviour {
 
 	Rigidbody2D rb;
+    private AudioSource audioSource;
+
 	public float horizontalSpeed;
 	public float jumpSpeed;
 	public float extraGravityDown;
@@ -14,6 +16,7 @@ public class PlayerScipt : MonoBehaviour {
 
 	void Awake () {
 		rb = GetComponent<Rigidbody2D> ();
+        audioSource = GetComponent<AudioSource>();
 	}
 
 	void FixedUpdate () {
@@ -66,6 +69,7 @@ public class PlayerScipt : MonoBehaviour {
 		//bool jumped = Input.GetButtonDown ("Jump"); Now Auto jumping
 		if (rb.velocity.y <= 0 && grounded) {
 			rb.velocity = new Vector2 (rb.velocity.x , jumpSpeed);
+            audioSource.Play();
 		}
 	}
 
