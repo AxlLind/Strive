@@ -8,7 +8,7 @@ public class DeathByContactScript : MonoBehaviour {
 	public GameObject gameOverScreen;
 	public GameControllerScript gcs;
 
-	void OnCollisionEnter2D(Collision2D other) {
+	void OnTriggerEnter2D(Collider2D other) {
 		// Called when player loses:
 		gameOverScreen.SetActive(true);
 		gcs.PauseUnPauseGame ();
