@@ -5,6 +5,8 @@ using UnityEngine;
 public class PlayerScipt : MonoBehaviour {
 
 	Rigidbody2D rb;
+    private AudioSource audioSource;
+
 	public float horizontalSpeed;
 	public float jumpSpeed;
 	public float extraGravityDown;
@@ -14,6 +16,7 @@ public class PlayerScipt : MonoBehaviour {
 
 	void Awake () {
 		rb = GetComponent<Rigidbody2D> ();
+        audioSource = GetComponent<AudioSource>();
 	}
 
 	void FixedUpdate () {
@@ -37,13 +40,36 @@ public class PlayerScipt : MonoBehaviour {
 	void KeepOnScreen() {
 		// TODO: Make this better maybe?
 		float xMax = 7.5f;
-		rb.position = new Vector2(Mathf.Clamp(rb.position.x, -xMax, xMax), rb.position.y);
+        rb.position = new Vector2(Mathf.Clamp(rb.position.x, -xMax, xMax), rb.position.y);
 	}
+
+    // Method for making the player appear on the other half of the screen
+    void SeamlessEdge(float xMax)
+    {
+        rb.interpolation = RigidbodyInterpolation2D.Extrapolate;
+        float playerHalf = rb.transform.localScale.x / 2;
+
+        if (rb.position.x > xMax + playerHalf)
+        {
+            rb.position = new Vector2((-xMax - playerHalf), rb.position.y);
+        }
+        else if (rb.position.x < -xMax - playerHalf)
+        {
+            rb.position = new Vector2((xMax + playerHalf), rb.position.y);
+        }
+    }
+
+    // Resets to interpolate
+    void SetToInterpolate()
+    {
+        rb.interpolation = RigidbodyInterpolation2D.Interpolate;
+    }
 
 	void Jump() {
 		//bool jumped = Input.GetButtonDown ("Jump"); Now Auto jumping
 		if (rb.velocity.y <= 0 && grounded) {
 			rb.velocity = new Vector2 (rb.velocity.x , jumpSpeed);
+            audioSource.Play();
 		}
 	}
 
