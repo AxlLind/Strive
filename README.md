@@ -1,1 +1,15 @@
-# 2D-platformer
+# 2D-Platformer
+This is a infinite jumper - type game, think Doodle Jump. The theme idea is
+8-bit graphics and sound. It is made using Unity and written in C#.
+
+#### How to install
+Currently you have to clone the repo and open it in the unity program.
+Later we will build Android-apks so you can easily install it on an android device and maybe include a web build of it with a link. We might also build an iOS version of the project. All of this is quite easily done in Unity.
+
+#### Testing Strategy
+Since we are using unity in this project we are continually testing everything we do. Doing traditional Unit Testing is not optimal for this kind of project, since the methods we write all work within Unity's physics engine. Our testing will still be extensive, but will consist of us playing the game (and possibly outside testers).
+
+### Project plan
+Our workflow consists of first creating a milestone in github for larger features, for example a basic UI. In a milestone we then create issues with smaller features contained in the overall milestone, in this example it might be a mute button for the pause screen.
+
+As we notice bugs and missing features we also create issues for those that we fix when we can.
