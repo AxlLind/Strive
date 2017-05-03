@@ -31,8 +31,12 @@ public class PlayerScipt : MonoBehaviour {
 
 
 	void HorizontalMovement() {
-		//float h = 3f * Input.acceleration.x;
-		float h = Input.GetAxis("Horizontal");
+		float h;
+		#if (UNITY_ANDROID || UNITY_IOS)
+		h = 3f * Input.acceleration.x;
+		#else
+		h = Input.GetAxis("Horizontal");
+		#endif
 		rb.velocity = new Vector2 (h * horizontalSpeed,rb.velocity.y);
 		KeepOnScreen ();
 	}
