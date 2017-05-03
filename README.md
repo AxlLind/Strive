@@ -12,4 +12,9 @@ Since we are using unity in this project we are continually testing everything w
 ### Project plan
 Our workflow consists of first creating a milestone in github for larger features, for example a basic UI. In a milestone we then create issues with smaller features contained in the overall milestone, in this example it might be a mute button for the pause screen.
 
-As we notice bugs and missing features we also create issues for those that we fix when we can.
+As we notice bugs and missing features we also create issues for those that we fix when we can. For now what we have in mind in terms of features to implement are:
+
+- Different types of platforms, for example moving platforms and trampolines
+- Improve UI and graphics with nicer looking sprites
+- Add features to UI such as being able to mute audio
+- A global highscore list, implemented using a firebase database
