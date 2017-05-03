@@ -9,10 +9,10 @@ public class PlayerScipt : MonoBehaviour {
 
 	public float horizontalSpeed;
 	public float jumpSpeed;
+    public float trampolineMultiplier;
 	public float extraGravityDown;
 	public Transform groundCheckLeft;
 	public Transform groundCheckRight;
-	public bool grounded;
 
 	void Awake () {
 		rb = GetComponent<Rigidbody2D> ();
@@ -23,7 +23,6 @@ public class PlayerScipt : MonoBehaviour {
 		if (GameControllerScript.isPaused) {
 			return;
 		}
-		grounded = isGrounded ();
 		ExtraGravityDown ();
 		Jump ();
 		HorizontalMovement ();
@@ -64,15 +63,26 @@ public class PlayerScipt : MonoBehaviour {
     }
 	void Jump() {
 		//bool jumped = Input.GetButtonDown ("Jump"); Now Auto jumping
-		if (rb.velocity.y <= 0 && grounded) {
+		if (rb.velocity.y <= 0 && isGrounded()) {
 			rb.velocity = new Vector2 (rb.velocity.x , jumpSpeed);
             audioSource.Play();
 		}
+        else if (rb.velocity.y <= 0 && hitTrampoline())
+        {
+            rb.velocity = new Vector2(rb.velocity.x, jumpSpeed * trampolineMultiplier);
+            // Play boing sound
+        }
 	}
 
+    bool hitTrampoline()
+    {
+        return Physics2D.Linecast(rb.position, groundCheckLeft.position)
+            || Physics2D.Linecast(rb.position, groundCheckRight.position);
+    }
+
 	bool isGrounded() {
-		return Physics2D.Linecast (rb.position, groundCheckLeft.position)
-			|| Physics2D.Linecast (rb.position, groundCheckRight.position);
+		return Physics2D.Linecast (rb.position, groundCheckLeft.position, LayerMask.NameToLayer("Trampoline"))
+			|| Physics2D.Linecast (rb.position, groundCheckRight.position, LayerMask.NameToLayer("Trampoline"));
 	}
 
 	void ExtraGravityDown() {

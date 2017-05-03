@@ -8,7 +8,9 @@ public class PlatformSpawnerScript : MonoBehaviour {
 	float distanceBetween = 3.2f;
 	bool lastWasHard = false;
 
-	public GameObject platformPrefab;
+	public GameObject normalPlatform;
+    public GameObject movingPlatform;
+    public GameObject trampolinePlatform;
 	public Transform platformParent;
 
 	void Update() {
@@ -25,6 +27,22 @@ public class PlatformSpawnerScript : MonoBehaviour {
 
 	void spawnPlatform() {
 		Vector2 pos = new Vector2(correctX(), transform.position.y);
+
+        GameObject platformPrefab = normalPlatform;
+        int randomInt = Random.Range(0, 10);
+        if (randomInt <= 7)
+        {
+            platformPrefab = normalPlatform;
+        }
+        else if (randomInt == 8)
+        {
+            platformPrefab = movingPlatform;
+        }
+        else if (randomInt == 9)
+        {
+            platformPrefab = trampolinePlatform;
+        }
+
 		GameObject go = Instantiate (platformPrefab, pos, Quaternion.identity);
 		go.transform.parent = platformParent;
 	}
