@@ -3,6 +3,8 @@ This is a infinite jumper - type game, think Doodle Jump. The theme idea is
 8-bit graphics and sound. It is made using Unity and written in C#.
 
 #### How to install
+You can try to play a web-version of the game [here](https://axllind.github.io/2D-platformer/), might not work since all browsers support Unity WebGL
+
 Currently you have to clone the repo and open it in the unity program.
 Later we will build Android-apks so you can easily install it on an android device and maybe include a web build of it with a link. We might also build an iOS version of the project. All of this is quite easily done in Unity.
 
