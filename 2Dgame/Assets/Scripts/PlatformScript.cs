@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlatformScript : MonoBehaviour {
 	
-	void FixedUpdate () {
+	protected void FixedUpdate () {
 		if (GameControllerScript.isPaused) {
 			return;
 		}
