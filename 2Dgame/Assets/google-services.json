@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "502727167470",
+    "firebase_url": "https://jumperunitygame.firebaseio.com",
+    "project_id": "jumperunitygame",
+    "storage_bucket": "jumperunitygame.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:502727167470:android:ebf049919a7c64f0",
+        "android_client_info": {
+          "package_name": "AxelJonatan.JumperGame.android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "502727167470-d0a1eqihbrir3h62usj9tpi278c2g11v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCm25hxuKY7guZ8YwfkheYm8lA40DLpvo8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
