@@ -44,7 +44,8 @@ public class HighscoreScreenController : MonoBehaviour {
 	}
 
 	void updateHighscoreBoard() {
-		for (int i = 0; i < leaderBoard.Count; i++) {
+		int count = leaderBoard.Count > 10 ? 10 : leaderBoard.Count;
+		for (int i = 0; i < count; i++) {
 			HighscoreObject hs = leaderBoard [i];
 			uiTexts [i].text = (i+1) + ". " + hs.getScore() + ", " + hs.getName ();
 		}
