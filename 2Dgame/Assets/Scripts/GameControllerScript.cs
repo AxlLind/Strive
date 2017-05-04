@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using Firebase;
+using Firebase.Unity.Editor;
+using Firebase.Database;
 
 public class GameControllerScript : MonoBehaviour {
 
@@ -25,11 +28,20 @@ public class GameControllerScript : MonoBehaviour {
 		UpdateScore ();
 	}
 
+	/**
+	 * Updates the UI-text object showing the score
+	 * Takes the score simply from the camera's y-position.
+	 */
 	void UpdateScore() {
-		score = (int)Camera.main.transform.position.y;
+		score = (int) Camera.main.transform.position.y;
 		scoreText.text = "Score: " + score;
 	}
 
+	/**
+	 * Pauses and unpauses the game (depending on the current state).
+	 * Does this by the field 'isPaused' and by turning off 'simulated'
+	 * on the player.
+	 */
 	public void PauseUnPauseGame() {
 		isPaused = !isPaused;
 		playerRB.simulated = isPaused ? false : true;
@@ -52,10 +64,19 @@ public class GameControllerScript : MonoBehaviour {
 		nameInput.SetActive (true);
 	}
 
+	/**
+	 * Sends the input from the 'input-field' along with the current score
+	 * to the firebase database. Also makes the send highscore button inactive
+	 * and changes the text to "High score sent!"
+	 */
 	public void OnEnterName() {
-		FirebaseController.sendHighScore (nameInput.GetComponent<InputField>().text, score);
+		FirebaseApp.DefaultInstance.SetEditorDatabaseUrl ("https://jumperunitygame.firebaseio.com/");
+		DatabaseReference highscoreRef = FirebaseDatabase.DefaultInstance.GetReference ("Highscores");
+		highscoreRef.Child(nameInput.GetComponent<InputField>().text).SetValueAsync(score);
+
 		nameInput.SetActive (false);
 		sendHighscore.interactable = false;
+		sendHighscore.GetComponentInChildren<Text>().text = "High score sent!";
 	}
 
 	// Button press-methods

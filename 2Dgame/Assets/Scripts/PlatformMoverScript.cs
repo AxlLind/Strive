@@ -5,15 +5,14 @@ using UnityEngine;
 public class PlatformMoverScript : PlatformScript {
 
     public float speed;
+    bool movingRight;
 
-    private bool movingRight;
-
-    private void Awake()
-    {
+    private void Awake() 
+	{
 		movingRight = Random.Range (0, 2) == 0 ? true : false;
     }
 
-    void FixedUpdate () {
+    new void FixedUpdate () {
 		if (GameControllerScript.isPaused) {
 			return;
 		}

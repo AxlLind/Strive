@@ -48,9 +48,8 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\CameraScript.cs" />
      <Compile Include="Assets\Scripts\DeathByContactScript.cs" />
-     <Compile Include="Assets\Scripts\FirebaseController.cs" />
      <Compile Include="Assets\Scripts\GameControllerScript.cs" />
-     <Compile Include="Assets\Scripts\HighscoreObject.cs" />
+     <Compile Include="Assets\Scripts\Highscore.cs" />
      <Compile Include="Assets\Scripts\HighscoreScreenController.cs" />
      <Compile Include="Assets\Scripts\PlatformMoverScript.cs" />
      <Compile Include="Assets\Scripts\PlatformScript.cs" />

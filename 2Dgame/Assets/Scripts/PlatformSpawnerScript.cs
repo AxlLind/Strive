@@ -6,7 +6,7 @@ public class PlatformSpawnerScript : MonoBehaviour {
 
 	float yPosAtLastSpawn;
 	float distanceBetween = 3.2f;
-	bool lastWasHard = false;
+	float lastXPos = 0;
 
 	public GameObject normalPlatform;
     public GameObject movingPlatform;
@@ -25,39 +25,46 @@ public class PlatformSpawnerScript : MonoBehaviour {
 		}
 	}
 
+	/**
+	 * Spawns a random platform type at a random x-position.
+	 */
 	void spawnPlatform() {
+		GameObject platformType = choosePlatform ();
 		Vector2 pos = new Vector2(correctX(), transform.position.y);
-
-        GameObject platformPrefab = normalPlatform;
-        int randomInt = Random.Range(0, 10);
-        if (randomInt <= 7)
-        {
-            platformPrefab = normalPlatform;
-        }
-        else if (randomInt == 8)
-        {
-            platformPrefab = movingPlatform;
-        }
-        else if (randomInt == 9)
-        {
-            platformPrefab = trampolinePlatform;
-        }
-
-		GameObject go = Instantiate (platformPrefab, pos, Quaternion.identity);
+		GameObject go = Instantiate (platformType, pos, Quaternion.identity);
 		go.transform.parent = platformParent;
 	}
 
-	int correctX() {
-		// Makes sure that two platforms cant be at opposite edge in a row
-		int x = 2 * Random.Range (-3, 4);
-		if (x == -6 || x == 6) {
-			if (lastWasHard) {
-				x = 2 * Random.Range (-2, 3);
-				lastWasHard = false;
-			} else {
-				lastWasHard = true;
-			}
+	/**
+	 * Returns a random platform prefab type. Currently:
+	 * 		80% chance normal
+	 * 		10% chance trampoline
+	 * 		10% chance moving
+	 */ 
+	GameObject choosePlatform() {
+		int randomInt = Random.Range(0, 10);
+		if (randomInt == 9)
+		{
+			return trampolinePlatform;
 		}
+		else if (randomInt == 8)
+		{
+			return movingPlatform;
+		}
+		return normalPlatform;
+	}
+
+	/**
+	 * Returns a random x-position to spawn a platform at.
+	 * Makes two platforms in the same position twice in a row
+	 * in a row less likely, though not impossible
+	 */
+	int correctX() {
+		int x = 2 * Random.Range (-3, 4);
+		if (x == lastXPos) {
+			x = 2 * Random.Range (-3, 4);
+		}
+		lastXPos = x;
 		return x;
 	}
 }

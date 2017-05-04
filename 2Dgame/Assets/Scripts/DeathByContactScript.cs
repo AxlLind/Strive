@@ -10,6 +10,10 @@ public class DeathByContactScript : MonoBehaviour {
 	public GameControllerScript gcs;
 	public Text gameOverScore;
 
+	/**
+	 * Called when the player touches this object and thereby losing the game.
+	 * Activates the game over window and 'pauses' the game.
+	 */
 	void OnTriggerEnter2D(Collider2D other) {
 		// Called when player loses:
 		gameOverScreen.SetActive(true);

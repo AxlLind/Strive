@@ -5,26 +5,15 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class StartScreenController : MonoBehaviour {
-
-	public Button startButton;
-	public Button settingsButton;
-	public Button highscoreButton;
-
-	void Start() {
-		startButton.onClick.AddListener(OnClickStartButton);
-		settingsButton.onClick.AddListener(OnClickSettingsButton);
-		highscoreButton.onClick.AddListener(OnClickHighScoreButton);
-	}
-
-	void OnClickStartButton() {
+	public void OnClickStartButton() {
 		SceneManager.LoadScene("Main_Game");
 	}
 
-	void OnClickSettingsButton() {
+	public void OnClickSettingsButton() {
 		SceneManager.LoadScene("Settings_Screen");
 	}
 
-	void OnClickHighScoreButton() {
+	public void OnClickHighScoreButton() {
 		SceneManager.LoadScene("Highscore_Screen");
 	}
 }
