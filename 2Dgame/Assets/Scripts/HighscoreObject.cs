@@ -1,8 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HighscoreObject {
+public class HighscoreObject : IComparable<HighscoreObject> {
 	string name;
 	long score;
 
@@ -17,5 +18,9 @@ public class HighscoreObject {
 
 	public long getScore() {
 		return this.score;
+	}
+
+	public int CompareTo(HighscoreObject that) {
+		return this.score.CompareTo (that.score);
 	}
 }
