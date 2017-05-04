@@ -7,18 +7,15 @@ using UnityEngine.SceneManagement;
 public class GameControllerScript : MonoBehaviour {
 
 	public static bool isPaused;
-	public Button pauseButton;
-	public Button restartButton;
-	public Button startScreenButton;
+	public GameObject nameInput;
+	public Button sendHighscore;
 	public Text scoreText;
 	public Rigidbody2D playerRB;
-	int score;
+	public int score;
 
 	void Start() {
 		isPaused = false;
-		pauseButton.onClick.AddListener (PauseUnPauseGame);
-		restartButton.onClick.AddListener (OnClickRestart);
-		startScreenButton.onClick.AddListener (OnClickStartScreen);
+		sendHighscore.interactable = true;
 	}
 
 	void Update () {
@@ -39,11 +36,27 @@ public class GameControllerScript : MonoBehaviour {
 
 	}
 
-	void OnClickRestart() {
+
+
+	// Button press-methods
+
+	public void OnClickRestart() {
 		SceneManager.LoadScene ("Main_Game");
 	}
 
-	void OnClickStartScreen() {
+	public void OnClickStartScreen() {
 		SceneManager.LoadScene ("Start_Screen");
 	}
+
+	public void OnClickSendHighScore() {
+		nameInput.SetActive (true);
+	}
+
+	public void OnEnterName() {
+		FirebaseController.sendHighScore (nameInput.GetComponent<InputField>().text, score);
+		nameInput.SetActive (false);
+		sendHighscore.interactable = false;
+	}
+
+	// Button press-methods
 }

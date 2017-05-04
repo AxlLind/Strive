@@ -10,4 +10,12 @@ public class HighscoreObject {
 		this.name = name;
 		this.score = score;
 	}
+
+	public string getName() {
+		return this.name;
+	}
+
+	public long getScore() {
+		return this.score;
+	}
 }
