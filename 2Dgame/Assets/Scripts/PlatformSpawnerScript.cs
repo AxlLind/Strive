@@ -41,7 +41,7 @@ public class PlatformSpawnerScript : MonoBehaviour {
 	 * 		10% chance trampoline
 	 * 		10% chance moving
 	 */ 
-	GameObject choosePlatform() {
+	GameObject basicPlatformScheme() {
 		int randomInt = Random.Range(0, 10);
 		if (randomInt == 9)
 		{
@@ -53,6 +53,25 @@ public class PlatformSpawnerScript : MonoBehaviour {
 		}
 		return normalPlatform;
 	}
+
+    /**
+     * Method for choosing platformscheme. At the moment holds basicPLatformScheme
+     * and all moving.
+     * Returns a platform prefab
+     * 
+     * Should be expanded upon.
+     */
+    GameObject choosePlatform()
+    {
+        if (this.transform.position.y > 1800 && this.transform.position.y < 2000)
+        {
+            return movingPlatform;
+        }
+        else
+        {
+            return basicPlatformScheme();
+        }
+    }
 
 	/**
 	 * Returns a random x-position to spawn a platform at.
