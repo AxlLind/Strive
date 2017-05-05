@@ -48,6 +48,17 @@ public class GameControllerScript : MonoBehaviour {
 
 	}
 
+	/**
+	 * Generates a random long number
+	 * (how does C# NOT have a built in function for this?!)
+	 * to be used as an ID for high score submissions.
+	 */
+	private long RandomLong() {
+		int a = Random.Range (int.MinValue, int.MaxValue);
+		int b = Random.Range (int.MinValue, int.MaxValue);
+		return ((long) a) << 32 + b;
+	}
+
 
 
 	// Button press-methods
@@ -61,7 +72,11 @@ public class GameControllerScript : MonoBehaviour {
 	}
 
 	public void OnClickSendHighScore() {
-		nameInput.SetActive (true);
+		if (nameInput.activeSelf) {
+			OnEnterName ();
+		} else {
+			nameInput.SetActive (true);
+		}
 	}
 
 	/**
@@ -72,7 +87,7 @@ public class GameControllerScript : MonoBehaviour {
 	public void OnEnterName() {
 		FirebaseApp.DefaultInstance.SetEditorDatabaseUrl ("https://jumperunitygame.firebaseio.com/");
 		DatabaseReference highscoreRef = FirebaseDatabase.DefaultInstance.GetReference ("Highscores");
-		highscoreRef.Child(nameInput.GetComponent<InputField>().text).SetValueAsync(score);
+		highscoreRef.Child(RandomLong().ToString()).Child(nameInput.GetComponent<InputField>().text).SetValueAsync(score);
 
 		nameInput.SetActive (false);
 		sendHighscore.interactable = false;

@@ -36,9 +36,12 @@ public class HighscoreScreenController : MonoBehaviour {
 			else if (task.IsCompleted) {
 				DataSnapshot snap = task.Result;
 				foreach(var child in snap.Children) {
-					string name = child.Key;
-					long score = (long) child.Value;
-					leaderBoard.Add( new Highscore(name, score) );
+					foreach(var hs in child.Children) {
+						// should only be one interation in the innerloop
+						string name = hs.Key;
+						long score = (long) hs.Value;
+						leaderBoard.Add( new Highscore(name, score) );
+					}
 				}
 				leaderBoard.Sort();
 				leaderBoard.Reverse();
