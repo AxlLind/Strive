@@ -12,7 +12,9 @@ public class PlayerScipt : MonoBehaviour {
     float trampolineMultiplier = 2f;
 	float extraGravityDown = 1.01f;
 
-	float lastXInput = 0f;
+	#if (UNITY_ANDROID || UNITY_IOS)
+	float lastXMovement = 0f;
+	#endif
 
 	public Transform groundCheckLeft;
 	public Transform groundCheckRight;
@@ -29,6 +31,7 @@ public class PlayerScipt : MonoBehaviour {
 		ExtraGravityDown ();
 		Jump ();
 		HorizontalMovement ();
+		KeepOnScreen (7.5f);
 	}
 
 	/**
@@ -38,16 +41,18 @@ public class PlayerScipt : MonoBehaviour {
 	 */
 	void HorizontalMovement() {
 		#if (UNITY_ANDROID || UNITY_IOS)
-		float xInput = 3f * Input.acceleration.x;
+		float newMovement = 8f * Input.acceleration.x - lastXMovement;
+		float h = Mathf.Lerp (lastXMovement, newMovement, 0.1f);
+
+		// Deadzone to prevent small movements
+		h = Mathf.Abs (h) < 0.03f ? 0 : h;
+
+		lastXMovement = h;
 		#else
-		float xInput = Input.GetAxis("Horizontal");
+		float h = Input.GetAxis("Horizontal");
 		#endif
 
-		float h = Mathf.Lerp (lastXInput, xInput, 0.1f);
-		lastXInput = xInput;
-
 		rb.velocity = new Vector2 (h * horizontalSpeed,rb.velocity.y);
-		KeepOnScreen (7.5f);
 	}
 
     /**
