@@ -12,6 +12,8 @@ public class PlayerScipt : MonoBehaviour {
     float trampolineMultiplier = 2f;
 	float extraGravityDown = 1.01f;
 
+	float lastXInput = 0f;
+
 	public Transform groundCheckLeft;
 	public Transform groundCheckRight;
 
@@ -35,12 +37,15 @@ public class PlayerScipt : MonoBehaviour {
 	 * Uses that input to move player in the x-direction.
 	 */
 	void HorizontalMovement() {
-		float h;
 		#if (UNITY_ANDROID || UNITY_IOS)
-		h = 3f * Input.acceleration.x;
+		float xInput = 3f * Input.acceleration.x;
 		#else
-		h = Input.GetAxis("Horizontal");
+		float xInput = Input.GetAxis("Horizontal");
 		#endif
+
+		float h = Mathf.Lerp (lastXInput, xInput, 0.1f);
+		lastXInput = xInput;
+
 		rb.velocity = new Vector2 (h * horizontalSpeed,rb.velocity.y);
 		KeepOnScreen (7.5f);
 	}
