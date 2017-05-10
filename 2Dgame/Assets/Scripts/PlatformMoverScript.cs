@@ -13,6 +13,7 @@ public class PlatformMoverScript : PlatformScript {
     private void Awake() 
 	{
 		movingRight = Random.Range (0, 2) == 0 ? true : false;
+        audioSource = GetComponent<AudioSource>();
     }
 
    
