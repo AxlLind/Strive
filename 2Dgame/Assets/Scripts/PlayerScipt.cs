@@ -9,6 +9,9 @@ public class PlayerScipt : MonoBehaviour {
 	float horizontalSpeed = 15f;
 	float extraGravityDown = 1.01f;
 
+	#if (UNITY_ANDROID || UNITY_IOS)
+	float lastXMovement = 0f;
+	#endif
 
 	void Awake () {
 		rb = GetComponent<Rigidbody2D> ();
@@ -20,6 +23,7 @@ public class PlayerScipt : MonoBehaviour {
 		}
 		ExtraGravityDown ();
 		HorizontalMovement ();
+		KeepOnScreen (7.5f);
 	}
 
 	/**
@@ -28,14 +32,19 @@ public class PlayerScipt : MonoBehaviour {
 	 * Uses that input to move player in the x-direction.
 	 */
 	void HorizontalMovement() {
-		float h;
 		#if (UNITY_ANDROID || UNITY_IOS)
-		h = 3f * Input.acceleration.x;
+		float newMovement = 8f * Input.acceleration.x - lastXMovement;
+		float h = Mathf.Lerp (lastXMovement, newMovement, 0.1f);
+
+		// Deadzone to prevent small movements
+		h = Mathf.Abs (h) < 0.03f ? 0 : h;
+
+		lastXMovement = h;
 		#else
-		h = Input.GetAxis("Horizontal");
+		float h = Input.GetAxis("Horizontal");
 		#endif
+
 		rb.velocity = new Vector2 (h * horizontalSpeed,rb.velocity.y);
-		KeepOnScreen (7.5f);
 	}
 
     /**

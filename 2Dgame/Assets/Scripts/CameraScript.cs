@@ -17,6 +17,7 @@ public class CameraScript : MonoBehaviour {
 		if (!startedMoving && target.position.y > 0f) {
 			startedMoving = true;
 		}
+
 		if (startedMoving) {
 			ScrollUp ();
 		}
