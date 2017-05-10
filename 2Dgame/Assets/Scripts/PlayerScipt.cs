@@ -5,23 +5,16 @@ using UnityEngine;
 public class PlayerScipt : MonoBehaviour {
 
 	Rigidbody2D rb;
-    AudioSource audioSource;
 
 	float horizontalSpeed = 15f;
-	float jumpSpeed = 20f;
-    float trampolineMultiplier = 2f;
 	float extraGravityDown = 1.01f;
 
 	#if (UNITY_ANDROID || UNITY_IOS)
 	float lastXMovement = 0f;
 	#endif
 
-	public Transform groundCheckLeft;
-	public Transform groundCheckRight;
-
 	void Awake () {
 		rb = GetComponent<Rigidbody2D> ();
-        audioSource = GetComponent<AudioSource>();
 	}
 
 	void FixedUpdate () {
@@ -29,7 +22,6 @@ public class PlayerScipt : MonoBehaviour {
 			return;
 		}
 		ExtraGravityDown ();
-		Jump ();
 		HorizontalMovement ();
 		KeepOnScreen (7.5f);
 	}
@@ -72,38 +64,6 @@ public class PlayerScipt : MonoBehaviour {
         }
     }
 
-	/**
-	 * Makes the player automatically jump if the player is grounded
-	 * i.e has hit a platform.
-	 */
-	void Jump() {
-		if (rb.velocity.y <= 0 && isGrounded()) {
-			rb.velocity = new Vector2 (rb.velocity.x , jumpSpeed);
-            audioSource.Play();
-		}
-        else if (rb.velocity.y <= 0 && hitTrampoline())
-        {
-            rb.velocity = new Vector2(rb.velocity.x, jumpSpeed * trampolineMultiplier);
-            // Play boing sound
-        }
-	}
-
-	/**
-	 * Checks if the player is standing on a trampoline-platform
-	 */
-    bool hitTrampoline()
-    {
-        return Physics2D.Linecast(rb.position, groundCheckLeft.position)
-            || Physics2D.Linecast(rb.position, groundCheckRight.position);
-    }
-
-	/**
-	 * Checks if the player is standing on a normal-platform
-	 */
-	bool isGrounded() {
-		return Physics2D.Linecast (rb.position, groundCheckLeft.position, LayerMask.NameToLayer("Trampoline"))
-			|| Physics2D.Linecast (rb.position, groundCheckRight.position, LayerMask.NameToLayer("Trampoline"));
-	}
 
 	/**
 	 * Applys a bit extra velocity down when the player is falling downward.

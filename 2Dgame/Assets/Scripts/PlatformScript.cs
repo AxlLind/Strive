@@ -4,10 +4,18 @@ using UnityEngine;
 
 public class PlatformScript : MonoBehaviour {
 
-	/**
+    protected float jumpSpeed = 20f;
+    protected AudioSource audioSource;
+
+    private void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
+
+    /**
 	 * Destorys the platform if it has moved below the camera's view.
 	 */
-	protected void FixedUpdate () {
+    protected void FixedUpdate () {
 		if (GameControllerScript.isPaused) {
 			return;
 		}
@@ -16,5 +24,18 @@ public class PlatformScript : MonoBehaviour {
 			Destroy (this.gameObject);
 		}
 	}
+
+
+    protected void OnCollisionEnter2D(Collision2D collision)
+    {
+        Rigidbody2D rb = collision.rigidbody;
+
+        if (rb.velocity.y <= 0)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);
+            audioSource.Play();
+        }
+        
+    }
 
 }
