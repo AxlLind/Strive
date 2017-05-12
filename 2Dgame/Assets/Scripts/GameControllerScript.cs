@@ -10,7 +10,7 @@ using Firebase.Database;
 public class GameControllerScript : MonoBehaviour {
 
 	public static bool isPaused;
-	public GameObject nameInput;
+	public InputField nameInput;
 	public Button sendHighscore;
 	public Text scoreText;
 	public Rigidbody2D playerRB;
@@ -54,7 +54,7 @@ public class GameControllerScript : MonoBehaviour {
 	/**
 	 * Generates a random long number
 	 * (how does C# NOT have a built in function for this?!)
-	 * to be used as an ID for high score submissions.
+	 * Used as an ID for high score submissions.
 	 */
 	private long RandomLong() {
 		int a = Random.Range (int.MinValue, int.MaxValue);
@@ -75,10 +75,10 @@ public class GameControllerScript : MonoBehaviour {
 	}
 
 	public void OnClickSendHighScore() {
-		if (nameInput.activeSelf) {
-			OnEnterName ();
+		if (nameInput.gameObject.activeSelf) {
+			SendHighscore();
 		} else {
-			nameInput.SetActive (true);
+			nameInput.gameObject.SetActive (true);
 		}
 	}
 
@@ -86,15 +86,23 @@ public class GameControllerScript : MonoBehaviour {
 	 * Sends the input from the 'input-field' along with the current score
 	 * to the firebase database. Also makes the send highscore button inactive
 	 * and changes the text to "High score sent!"
+	 * 
+	 * This is called when pressing enter in the input-field or when pressing the send HS button again.
 	 */
-	public void OnEnterName() {
-		FirebaseApp.DefaultInstance.SetEditorDatabaseUrl ("https://jumperunitygame.firebaseio.com/");
-		DatabaseReference highscoreRef = FirebaseDatabase.DefaultInstance.GetReference ("Highscores");
-		highscoreRef.Child(RandomLong().ToString()).Child(nameInput.GetComponent<InputField>().text).SetValueAsync(score);
+	public void SendHighscore() {
+		string name = nameInput.text.Trim();
+		if (name.Length > 0) {
+			FirebaseApp.DefaultInstance.SetEditorDatabaseUrl ("https://jumperunitygame.firebaseio.com/");
+			DatabaseReference highscoreRef = FirebaseDatabase.DefaultInstance.GetReference ("Highscores");
 
-		nameInput.SetActive (false);
-		sendHighscore.interactable = false;
-		sendHighscore.GetComponentInChildren<Text>().text = "High score sent!";
+			highscoreRef.Child( RandomLong().ToString() ).Child( name ).SetValueAsync( score );
+
+			nameInput.gameObject.SetActive (false);
+			sendHighscore.interactable = false;
+			sendHighscore.GetComponentInChildren<Text> ().text = "High score sent!";
+		} else {
+			sendHighscore.GetComponentInChildren<Text> ().text = "Please enter a name";
+		}
 	}
 
 	// Button press-methods
