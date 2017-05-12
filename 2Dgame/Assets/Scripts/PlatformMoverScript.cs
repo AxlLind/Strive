@@ -18,10 +18,6 @@ public class PlatformMoverScript : PlatformScript {
 
    
     new void FixedUpdate () {
-		if (GameControllerScript.isPaused) {
-			return;
-		}
-
 		base.FixedUpdate ();
 	}
 
@@ -32,6 +28,11 @@ public class PlatformMoverScript : PlatformScript {
     */
     private void Update()
     {
+        if (GameControllerScript.isPaused)
+        {
+            return;
+        }
+
         if (transform.position.x > 8 - this.transform.localScale.x / 2)
         {
             movingRight = false;
