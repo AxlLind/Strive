@@ -12,15 +12,43 @@ public class HighscoreScreenController : MonoBehaviour {
 
 	public GameObject loadingSign;
 	public List<Text> uiTexts;
-	List<Highscore> leaderBoard;
+
+	List<Highscore> leaderBoard = new List<Highscore>();
 	DatabaseReference highscoreRef;
 
+	bool hasInternet = false;
+	bool hasGotList = false;
+
 	void Start() {
-		loadingSign.SetActive(true);
 		FirebaseApp.DefaultInstance.SetEditorDatabaseUrl ("https://jumperunitygame.firebaseio.com/");
 		highscoreRef = FirebaseDatabase.DefaultInstance.GetReference ("Highscores");
-		leaderBoard = new List<Highscore>();
+
+		// In a coroutine to prevent the game being unresponsive until it gets a response
+		StartCoroutine (checkConnection());
+	}
+
+	void Update() {
+		if (!hasInternet || hasGotList) {
+			return;
+		}
+
+		hasGotList = true;
 		retrieveHighScoreList ();
+	}
+
+	/**
+	 * Checks to see if the user has an internet connection.
+	 * Does this by pinging google.com and sets the 'hasInternet' variable
+	 * to true if it gets a response.
+	 */
+	IEnumerator checkConnection() {
+		WWW web = new WWW ("http://google.com");
+		yield return web;
+		if (web.error != null) {
+			loadingSign.GetComponent<Text>().text = "No Internet";
+			Debug.Log ("No Internet Connection!");
+		}
+		hasInternet = (web.error == null);
 	}
 
 	/**
@@ -34,19 +62,13 @@ public class HighscoreScreenController : MonoBehaviour {
 				Debug.Log("Firebase FAILED");
 			}
 			else if (task.IsCompleted) {
-				DataSnapshot snap = task.Result;
-				foreach(var child in snap.Children) {
+				foreach(var child in task.Result.Children) {
 					foreach(var hs in child.Children) {
-						// should only be one interation in the innerloop
-						string name = hs.Key;
-						long score = (long) hs.Value;
-						leaderBoard.Add( new Highscore(name, score) );
+						// should only be one interation in the inner loop
+						leaderBoard.Add( new Highscore(hs.Key, (long) hs.Value) );
 					}
 				}
 				leaderBoard.Sort();
-				leaderBoard.Reverse();
-
-				loadingSign.SetActive(false);
 				updateHighscoreBoard();
 			}
 		});
@@ -57,6 +79,7 @@ public class HighscoreScreenController : MonoBehaviour {
 	 * info from the 'leaderBoard'-field.
 	 */
 	void updateHighscoreBoard() {
+		loadingSign.SetActive(false);
 		int count = leaderBoard.Count > 10 ? 10 : leaderBoard.Count;
 
 		for (int i = 0; i < count; i++) {

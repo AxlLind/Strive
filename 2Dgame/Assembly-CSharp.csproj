@@ -57,6 +57,7 @@
      <Compile Include="Assets\Scripts\PlayerScipt.cs" />
      <Compile Include="Assets\Scripts\SettingsScreenController.cs" />
      <Compile Include="Assets\Scripts\StartScreenController.cs" />
+     <Compile Include="Assets\TrampolineScript.cs" />
      <None Include="Assets\Firebase\m2repository\com\google\firebase\firebase-auth-unity\maven-metadata.xml" />
      <None Include="Assets\Firebase\Editor\FirebaseAuth.txt" />
      <None Include="Assets\PlayServicesResolver\proguard-unity.txt" />

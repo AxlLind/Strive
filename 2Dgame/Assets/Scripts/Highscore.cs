@@ -13,6 +13,6 @@ public class Highscore : IComparable<Highscore> {
 	}
 
 	public int CompareTo(Highscore that) {
-		return this.score.CompareTo (that.score);
+		return -this.score.CompareTo (that.score);
 	}
 }
