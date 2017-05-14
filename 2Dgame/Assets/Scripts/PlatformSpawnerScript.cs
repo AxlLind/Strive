@@ -42,34 +42,61 @@ public class PlatformSpawnerScript : MonoBehaviour {
 	 * 		10% chance moving
 	 */ 
 	GameObject basicPlatformScheme() {
-		int randomInt = Random.Range(0, 10);
-		if (randomInt == 9)
-		{
-			return trampolinePlatform;
-		}
-		else if (randomInt == 8)
-		{
-			return movingPlatform;
-		}
-		return normalPlatform;
+        return PlatformScheme(80, 10, 10);
 	}
 
-    /**
-     * Method for choosing platformscheme. At the moment holds basicPLatformScheme
-     * and all moving.
-     * Returns a platform prefab
-     * 
-     * Should be expanded upon.
-     */
-    GameObject choosePlatform()
+    /// <summary>
+    /// Modifiable PlatformScheme
+    /// Useful when scaling difficulty
+    /// </summary>
+    /// <param name="percentNormal"></param>
+    /// <param name="percentTrampoline"></param>
+    /// <param name="percentMoving"></param>
+    /// <returns>Returns a platformsprefab</returns>
+    GameObject PlatformScheme(int percentNormal, int percentTrampoline, int percentMoving)
     {
-        if (this.transform.position.y > 1800 && this.transform.position.y < 2000)
+        int randomInt = Random.Range(0, 100);
+        if (randomInt < percentTrampoline)
+        {
+            return trampolinePlatform;
+        }
+        else if (randomInt < percentMoving + percentTrampoline)
         {
             return movingPlatform;
         }
-        else
+        return normalPlatform;
+    }
+
+    /**
+     * Method for choosing platformscheme.
+     * Is the game's primary progressionsystem.
+     * Difficulty increases as score increases.
+     */
+    GameObject choosePlatform()
+    {
+        if (this.transform.position.y < 500)
         {
             return basicPlatformScheme();
+        }
+        else if (this.transform.position.y < 800)
+        {
+            return PlatformScheme(45, 10, 45);
+        }
+        else if (this.transform.position.y < 1000)
+        {
+            return PlatformScheme(0, 0, 100); // First all moving
+        }
+        else if (this.transform.position.y < 1200)
+        {
+            return PlatformScheme(60, 20, 20); // Bit of a breather
+        }
+        else if (this.transform.position.y < 5000)
+        {
+            return PlatformScheme(5, 5, 90); // More hard stuff
+        }
+        else
+        {
+            return PlatformScheme(5, 70, 25); // Ya did it
         }
     }
 
