@@ -10,11 +10,20 @@ using Firebase.Database;
 public class GameControllerScript : MonoBehaviour {
 
 	public static bool isPaused;
-	public InputField nameInput;
-	public Button sendHighscore;
 	public Text scoreText;
 	public Rigidbody2D playerRB;
 	public int score;
+
+	public GameObject scoreOnGameOver;
+	public InputField nameInput;
+	public Button sendHighscore;
+
+	public Button sendButton;
+	public Sprite pauseSprite;
+	public Sprite playSprite;
+
+	public Sprite enterName;
+	public Sprite enterNameHi;
 
 	void Start() {
 		#if (UNITY_ANDROID || UNITY_IOS)
@@ -48,7 +57,6 @@ public class GameControllerScript : MonoBehaviour {
 	public void PauseUnPauseGame() {
 		isPaused = !isPaused;
 		playerRB.simulated = isPaused ? false : true;
-
 	}
 
 	/**
@@ -66,6 +74,11 @@ public class GameControllerScript : MonoBehaviour {
 
 	// Button press-methods
 
+	public void OnClickPause(Image img) {
+		img.overrideSprite = isPaused ? pauseSprite : playSprite;
+		PauseUnPauseGame ();
+	}
+
 	public void OnClickRestart() {
 		SceneManager.LoadScene ("Main_Game");
 	}
@@ -79,6 +92,7 @@ public class GameControllerScript : MonoBehaviour {
 			SendHighscore();
 		} else {
 			nameInput.gameObject.SetActive (true);
+			scoreOnGameOver.SetActive (false);
 		}
 	}
 
@@ -98,10 +112,12 @@ public class GameControllerScript : MonoBehaviour {
 			highscoreRef.Child( RandomLong().ToString() ).Child( name ).SetValueAsync( score );
 
 			nameInput.gameObject.SetActive (false);
+			scoreOnGameOver.SetActive (true);
 			sendHighscore.interactable = false;
-			sendHighscore.GetComponentInChildren<Text> ().text = "High score sent!";
 		} else {
-			sendHighscore.GetComponentInChildren<Text> ().text = "Please enter a name";
+			sendButton.image.overrideSprite = enterName;
+			Sprite spr = sendButton.spriteState.highlightedSprite; 
+			spr = enterNameHi;
 		}
 	}
 
