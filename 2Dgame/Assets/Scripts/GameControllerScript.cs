@@ -26,12 +26,15 @@ public class GameControllerScript : MonoBehaviour {
 	public Sprite enterName;
 	public Sprite enterNameHi;
 
+    private bool straight;
+
 	void Start() {
 		#if (UNITY_ANDROID || UNITY_IOS)
 		Screen.sleepTimeout = SleepTimeout.NeverSleep;
 		#endif
 		isPaused = false;
 		sendHighscore.interactable = true;
+        straight = true;
 	}
 
 	void Update () {
@@ -124,4 +127,26 @@ public class GameControllerScript : MonoBehaviour {
 	}
 
 	// Button press-methods
+
+
+    /**
+     * Rotates the camera smooooth
+     *
+     */ 
+    public IEnumerator RotateCameraSmooth()
+    {
+        for (float t = 0.0f; t < 1.0f; t += Time.deltaTime)
+        {
+            if (straight)
+            {
+                cameraTransform.rotation = Quaternion.Lerp(cameraTransform.rotation, Quaternion.Euler(0, 0, 180), t);
+            }
+            else
+            {
+                cameraTransform.rotation = Quaternion.Lerp(cameraTransform.rotation, Quaternion.Euler(0, 0, 0), t);
+            }
+            yield return new WaitForEndOfFrame();
+        }
+        straight = !straight;
+    }
 }

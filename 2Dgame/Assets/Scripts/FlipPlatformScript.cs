@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class FlipPlatformScript : PlatformScript {
 
+    public GameControllerScript gcs;
+
     private bool didWeFlip;
-    private Transform cameraTransform;
 
     private new void Awake()
     {
         didWeFlip = false;
-        cameraTransform = Camera.main.transform;
+        gcs = GameObject.Find("GameController").GetComponent<GameControllerScript>();
         base.Awake();
     }
 
@@ -27,7 +28,8 @@ public class FlipPlatformScript : PlatformScript {
 
             if (!didWeFlip)
             {
-                cameraTransform.Rotate(0, 0, 180);
+                gcs.StartCoroutine("RotateCameraSmooth");
+                Debug.Log("flip");
                 didWeFlip = true;
             }
         }

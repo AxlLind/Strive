@@ -55,20 +55,7 @@ public class PlatformSpawnerScript : MonoBehaviour {
     /// <returns>Returns a platformsprefab</returns>
     GameObject PlatformScheme(int percentNormal, int percentTrampoline, int percentMoving)
     {
-        int randomInt = Random.Range(0, 100);
-        if (randomInt < percentNormal)
-        {
-            return platformPrefabs[0];
-        }
-        else if (randomInt < percentNormal + percentMoving)
-        {
-            return platformPrefabs[1];
-        }
-        else if (randomInt < percentNormal + percentMoving + percentTrampoline)
-        {
-            return platformPrefabs[2];
-        }
-        return platformPrefabs[0];
+        return PlatformScheme(percentNormal, percentTrampoline, percentMoving, 0);
     }
 
     /// <summary>
