@@ -29,7 +29,6 @@ public class FlipPlatformScript : PlatformScript {
             if (!didWeFlip)
             {
                 gcs.StartCoroutine("RotateCameraSmooth");
-                Debug.Log("flip");
                 didWeFlip = true;
             }
         }

@@ -118,7 +118,7 @@ public class PlatformSpawnerScript : MonoBehaviour {
     {
         if (this.transform.position.y < 500)
         {
-            return basicPlatformScheme();
+            return PlatformScheme(90, 0, 0, 10);
         }
         else if (this.transform.position.y < 800)
         {
