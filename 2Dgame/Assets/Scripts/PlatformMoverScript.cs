@@ -10,10 +10,10 @@ public class PlatformMoverScript : PlatformScript {
     /**
      * Sets the starting moving direction
      */
-    private void Awake() 
+    private new void Awake() 
 	{
 		movingRight = Random.Range (0, 2) == 0 ? true : false;
-        audioSource = GetComponent<AudioSource>();
+        base.Awake();
     }
 
    

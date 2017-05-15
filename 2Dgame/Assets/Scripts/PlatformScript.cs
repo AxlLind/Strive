@@ -7,7 +7,7 @@ public class PlatformScript : MonoBehaviour {
     protected float jumpSpeed = 20f;
     protected AudioSource audioSource;
 
-    private void Awake()
+    protected void Awake()
     {
         audioSource = GetComponent<AudioSource>();
     }

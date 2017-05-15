@@ -7,10 +7,10 @@ public class PlatformSpawnerScript : MonoBehaviour {
 	float yPosAtLastSpawn;
 	float distanceBetween = 3.2f;
 	float lastXPos = 0;
+    int flipCounter = 0;
+    bool didWeFlip = false;
 
-	public GameObject normalPlatform;
-    public GameObject movingPlatform;
-    public GameObject trampolinePlatform;
+    public GameObject[] platformPrefabs;
 	public Transform platformParent;
 
 	void Update() {
@@ -56,15 +56,70 @@ public class PlatformSpawnerScript : MonoBehaviour {
     GameObject PlatformScheme(int percentNormal, int percentTrampoline, int percentMoving)
     {
         int randomInt = Random.Range(0, 100);
-        if (randomInt < percentTrampoline)
+        if (randomInt < percentNormal)
         {
-            return trampolinePlatform;
+            return platformPrefabs[0];
         }
-        else if (randomInt < percentMoving + percentTrampoline)
+        else if (randomInt < percentNormal + percentMoving)
         {
-            return movingPlatform;
+            return platformPrefabs[1];
         }
-        return normalPlatform;
+        else if (randomInt < percentNormal + percentMoving + percentTrampoline)
+        {
+            return platformPrefabs[2];
+        }
+        return platformPrefabs[0];
+    }
+
+    /// <summary>
+    /// With flipplatform
+    /// </summary>
+    /// <param name="percentNormal"></param>
+    /// <param name="percentTrampoline"></param>
+    /// <param name="percentMoving"></param>
+    /// <param name="percentFlip"></param>
+    /// <returns></returns>
+    GameObject PlatformScheme(int percentNormal, int percentTrampoline, int percentMoving, int percentFlip)
+    {
+        if (didWeFlip)
+        {
+            flipCounter++;
+            if (flipCounter % 6 == 0)
+            {
+                didWeFlip = false;
+                return platformPrefabs[3];
+            }
+        }
+
+        int randomInt = Random.Range(0, 100);
+        if (randomInt < percentNormal)
+        {
+            return platformPrefabs[0];
+        }
+        else if (randomInt < percentNormal + percentMoving)
+        {
+            return platformPrefabs[1];
+        }
+        else if (randomInt < percentNormal + percentMoving + percentTrampoline)
+        {
+            return platformPrefabs[2];
+        }
+        else if (randomInt < percentNormal + percentMoving + percentTrampoline + percentFlip)
+        {
+            if (didWeFlip)
+            {
+                didWeFlip = false;
+                flipCounter = 0;
+            }
+            else
+            {
+                didWeFlip = true;
+                flipCounter++;
+            }
+            
+            return platformPrefabs[3];
+        }
+        return platformPrefabs[0];
     }
 
     /**
@@ -88,15 +143,15 @@ public class PlatformSpawnerScript : MonoBehaviour {
         }
         else if (this.transform.position.y < 1200)
         {
-            return PlatformScheme(60, 20, 20); // Bit of a breather
+            return PlatformScheme(60, 20, 10, 10); // Flips
         }
         else if (this.transform.position.y < 5000)
         {
-            return PlatformScheme(5, 5, 90); // More hard stuff
+            return PlatformScheme(5, 5, 70, 20); // More hard stuff
         }
         else
         {
-            return PlatformScheme(5, 70, 25); // Ya did it
+            return PlatformScheme(0, 0, 0, 100); // Fliptastic
         }
     }
 

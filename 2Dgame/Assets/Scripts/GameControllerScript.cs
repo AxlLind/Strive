@@ -17,6 +17,7 @@ public class GameControllerScript : MonoBehaviour {
 	public GameObject scoreOnGameOver;
 	public InputField nameInput;
 	public Button sendHighscore;
+    public Transform cameraTransform;
 
 	public Button sendButton;
 	public Sprite pauseSprite;
@@ -37,6 +38,7 @@ public class GameControllerScript : MonoBehaviour {
 		if (isPaused) {
 			return;
 		}
+        this.transform.position = cameraTransform.position;
 		UpdateScore ();
 	}
 
