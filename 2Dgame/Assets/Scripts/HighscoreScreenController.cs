@@ -11,6 +11,7 @@ using Firebase.Database;
 public class HighscoreScreenController : MonoBehaviour {
 
 	public GameObject loadingSign;
+	public Text localBest;
 	public List<Text> uiTexts;
 
 	List<Highscore> leaderBoard = new List<Highscore>();
@@ -25,6 +26,9 @@ public class HighscoreScreenController : MonoBehaviour {
 
 		// In a coroutine to prevent the game being unresponsive until it gets a response
 		StartCoroutine (checkConnection());
+
+		int score = PlayerPrefs.GetInt ("LocalScore");
+		localBest.text = "Your Best: " + score;
 	}
 
 	void Update() {
