@@ -47,7 +47,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\CameraScript.cs" />
-     <Compile Include="Assets\Scripts\DeathByContactScript.cs" />
+     <Compile Include="Assets\Scripts\DeathScript.cs" />
      <Compile Include="Assets\Scripts\FlipPlatformScript.cs" />
      <Compile Include="Assets\Scripts\GameControllerScript.cs" />
      <Compile Include="Assets\Scripts\Highscore.cs" />
@@ -55,7 +55,7 @@
      <Compile Include="Assets\Scripts\PlatformMoverScript.cs" />
      <Compile Include="Assets\Scripts\PlatformScript.cs" />
      <Compile Include="Assets\Scripts\PlatformSpawnerScript.cs" />
-     <Compile Include="Assets\Scripts\PlayerScipt.cs" />
+     <Compile Include="Assets\Scripts\PlayerScript.cs" />
      <Compile Include="Assets\Scripts\SettingsScreenController.cs" />
      <Compile Include="Assets\Scripts\StartScreenController.cs" />
      <Compile Include="Assets\Scripts\TrampolineScript.cs" />

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class DeathByContactScript : MonoBehaviour {
+public class DeathScript : MonoBehaviour {
 
 	public GameObject gameOverScreen;
 	public GameControllerScript gcs;
@@ -17,7 +17,15 @@ public class DeathByContactScript : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D other) {
 		// Called when player loses:
 		gameOverScreen.SetActive(true);
-		gameOverScore.text = "You lose! Score: " + gcs.score;
+		int bestScore = PlayerPrefs.GetInt ("LocalScore");
+		if (bestScore < gcs.score) {
+			PlayerPrefs.SetInt ("LocalScore", gcs.score);
+			gameOverScore.text = "New Highscore! " + gcs.score;
+		} else {
+			gameOverScore.text = "Score: " + gcs.score;
+		}
 		gcs.PauseUnPauseGame ();
+
+
 	}
 }
