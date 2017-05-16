@@ -16,6 +16,12 @@ public class SettingsScreenController : MonoBehaviour {
 		musicToggle.isOn = (music == "True");
 	}
 
+	void Update() {
+		if (Input.GetKeyDown( KeyCode.Escape )) {
+			OnClickBackButton();
+		}
+	}
+
 	public void OnClickBackButton() {
 		SceneManager.LoadScene ("Start_Screen");
 	}

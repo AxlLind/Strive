@@ -32,6 +32,9 @@ public class HighscoreScreenController : MonoBehaviour {
 	}
 
 	void Update() {
+		if (Input.GetKeyDown( KeyCode.Escape )) {
+			OnClickBackButton();
+		}
 		if (!hasInternet || hasGotList) {
 			return;
 		}
