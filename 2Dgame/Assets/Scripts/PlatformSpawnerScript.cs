@@ -45,19 +45,6 @@ public class PlatformSpawnerScript : MonoBehaviour {
         return PlatformScheme(80, 10, 10);
 	}
 
-    /// <summary>
-    /// Modifiable PlatformScheme
-    /// Useful when scaling difficulty
-    /// </summary>
-    /// <param name="percentNormal"></param>
-    /// <param name="percentTrampoline"></param>
-    /// <param name="percentMoving"></param>
-    /// <returns>Returns a platformsprefab</returns>
-    GameObject PlatformScheme(int percentNormal, int percentTrampoline, int percentMoving)
-    {
-        return PlatformScheme(percentNormal, percentTrampoline, percentMoving, 0);
-    }
-
     /**
      * Platformscheme with a variable amount of parameters.
      * 
@@ -115,11 +102,11 @@ public class PlatformSpawnerScript : MonoBehaviour {
         }
         else if (this.transform.position.y < 800)
         {
-            return PlatformScheme(45, 10, 45);
+            return PlatformScheme(45, 45, 10);
         }
         else if (this.transform.position.y < 1000)
         {
-            return PlatformScheme(0, 0, 100); // First all moving
+            return PlatformScheme(0, 100); // First all moving
         }
         else if (this.transform.position.y < 1200)
         {
@@ -127,7 +114,7 @@ public class PlatformSpawnerScript : MonoBehaviour {
         }
         else if (this.transform.position.y < 5000)
         {
-            return PlatformScheme(5, 5, 70, 20); // More hard stuff
+            return PlatformScheme(5, 70, 5, 20); // More hard stuff
         }
         else
         {
