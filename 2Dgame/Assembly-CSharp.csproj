@@ -52,6 +52,7 @@
      <Compile Include="Assets\Scripts\GameControllerScript.cs" />
      <Compile Include="Assets\Scripts\Highscore.cs" />
      <Compile Include="Assets\Scripts\HighscoreScreenController.cs" />
+     <Compile Include="Assets\Scripts\MenuPlayerScript.cs" />
      <Compile Include="Assets\Scripts\PlatformMoverScript.cs" />
      <Compile Include="Assets\Scripts\PlatformScript.cs" />
      <Compile Include="Assets\Scripts\PlatformSpawnerScript.cs" />
