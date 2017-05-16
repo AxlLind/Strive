@@ -42,7 +42,8 @@ public class GameControllerScript : MonoBehaviour {
         straight = true;
 
 		int highscore = PlayerPrefs.GetInt ("LocalScore");
-		scoreLine.position = new Vector2 (scoreLine.position.x, highscore);
+		int y = highscore > 0 ? highscore : -100;
+		scoreLine.position = new Vector2 (scoreLine.position.x, y);
 		highscoreText.text = "Highscore: " + highscore;
 
 		string sound = PlayerPrefs.GetString ("Sound");
