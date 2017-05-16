@@ -135,6 +135,7 @@ public class GameControllerScript : MonoBehaviour {
      */ 
     public IEnumerator RotateCameraSmooth()
     {
+        PauseUnPauseGame();
         for (float t = 0.0f; t < 1.0f; t += Time.deltaTime)
         {
             if (straight)
@@ -148,5 +149,6 @@ public class GameControllerScript : MonoBehaviour {
             yield return new WaitForEndOfFrame();
         }
         straight = !straight;
+        PauseUnPauseGame();
     }
 }
