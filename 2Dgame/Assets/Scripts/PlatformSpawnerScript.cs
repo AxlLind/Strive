@@ -42,7 +42,7 @@ public class PlatformSpawnerScript : MonoBehaviour {
 	 * 		10% chance moving
 	 */ 
 	GameObject basicPlatformScheme() {
-        return PlatformScheme(70, 10, 10, 10);
+        return PlatformScheme(80, 10, 10);
 	}
 
     /**
@@ -96,29 +96,29 @@ public class PlatformSpawnerScript : MonoBehaviour {
      */
     GameObject choosePlatform()
     {
-        if (this.transform.position.y < 500)
+        if (this.transform.position.y < 200)
         {
             return basicPlatformScheme();
         }
-        else if (this.transform.position.y < 800)
+        else if (this.transform.position.y < 500)
         {
             return PlatformScheme(45, 45, 10);
         }
-        else if (this.transform.position.y < 1000)
+        else if (this.transform.position.y < 700)
         {
             return PlatformScheme(0, 100); // First all moving
         }
-        else if (this.transform.position.y < 1200)
+        else if (this.transform.position.y < 1000)
         {
             return PlatformScheme(60, 20, 10, 10); // Flips
         }
-        else if (this.transform.position.y < 5000)
+        else if (this.transform.position.y < 1500)
         {
-            return PlatformScheme(5, 70, 5, 20); // More hard stuff
+            return PlatformScheme(45, 40, 5, 10); // More hard stuff
         }
         else
         {
-            return PlatformScheme(0, 0, 0, 100); // Fliptastic
+            return PlatformScheme(0, 85, 5, 10); // Fliptastic
         }
     }
 
