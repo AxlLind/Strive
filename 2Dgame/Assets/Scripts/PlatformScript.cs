@@ -35,7 +35,9 @@ public class PlatformScript : MonoBehaviour {
 		if (rb.velocity.y <= 0 && dist >= 0)
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);
-            audioSource.Play();
+			if (GameControllerScript.soundOn) {
+            	audioSource.Play();
+			}
         }
         
     }

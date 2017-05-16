@@ -10,6 +10,9 @@ using Firebase.Database;
 public class GameControllerScript : MonoBehaviour {
 
 	public static bool isPaused;
+	public static bool soundOn;
+	public static bool musicOn;
+
 	public Text scoreText;
 	public Rigidbody2D playerRB;
 	public int score;
@@ -42,6 +45,12 @@ public class GameControllerScript : MonoBehaviour {
 		int highscore = PlayerPrefs.GetInt ("LocalScore");
 		scoreLine.position = new Vector2 (scoreLine.position.x, highscore);
 		highscoreText.text = "Highscore: " + highscore;
+
+		string sound = PlayerPrefs.GetString ("Sound");
+		soundOn = (sound == "True");
+
+		string music = PlayerPrefs.GetString ("Music");
+		musicOn = (music == "True");
 	}
 
 	void Update () {
