@@ -17,6 +17,7 @@ public class GameControllerScript : MonoBehaviour {
 	public Rigidbody2D playerRB;
 	public int score;
 
+	public GameObject pauseScreen;
 	public GameObject scoreOnGameOver;
 	public InputField nameInput;
 	public Button sendHighscore;
@@ -97,6 +98,7 @@ public class GameControllerScript : MonoBehaviour {
 
 	public void OnClickPause(Image img) {
 		img.overrideSprite = isPaused ? pauseSprite : playSprite;
+		pauseScreen.SetActive( !isPaused );
 		PauseUnPauseGame ();
 	}
 
