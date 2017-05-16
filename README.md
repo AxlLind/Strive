@@ -1,14 +1,16 @@
-# 2D-Platformer
+# JumperGame
 This is a infinite jumper game. The theme idea is
 8-bit graphics and sound. It is made using Unity and written in C#. The main
 platform for the game is mobile, both android and iOS, using the gyroscope
 accelerometer for controls.
 
 #### How to install
-You can try to play a web-version of the game [here](https://axllind.github.io/2D-platformer/), might not work since not all browsers support Unity WebGL
+For android the process is quite easy. Simply download the [apk
+here](https://github.com/AxlLind/2D-platformer/raw/master/JumperGame.apk) and
+open the file on your phone.
 
-Currently you have to clone the repo and open it in the unity program.
-Later we will build Android-apks so you can easily install it on an android device. We might also build an iOS version of the project. All of this is quite easily done in Unity.
+Since we do not have an apple developer license we cannot distribute an iOS
+version of this project.
 
 #### Testing Strategy
 Since we are using unity in this project we are continually testing everything we do. Doing traditional Unit Testing is not optimal for this kind of project, since the methods we write all work within Unity's physics and graphics engine. Our testing will still be extensive, but will consist of us playing the game (and possibly outside testers).

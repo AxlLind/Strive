@@ -42,7 +42,7 @@ public class GameControllerScript : MonoBehaviour {
         straight = true;
 
 		int highscore = PlayerPrefs.GetInt ("LocalScore");
-		int y = highscore > 0 ? highscore : -100;
+		int y = highscore == 0 ? -100 : highscore;
 		scoreLine.position = new Vector2 (scoreLine.position.x, y);
 		highscoreText.text = "Highscore: " + highscore;
 
