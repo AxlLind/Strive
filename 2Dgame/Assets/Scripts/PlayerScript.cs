@@ -44,7 +44,8 @@ public class PlayerScript : MonoBehaviour {
 		float h = Input.GetAxis("Horizontal");
 		#endif
 
-		rb.velocity = new Vector2 (h * horizontalSpeed,rb.velocity.y);
+		float flipped = (GameControllerScript.straight == false) ? -1 : 1;
+		rb.velocity = new Vector2 (flipped * h * horizontalSpeed,rb.velocity.y);
 	}
 
     /**

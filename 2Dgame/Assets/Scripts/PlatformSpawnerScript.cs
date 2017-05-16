@@ -42,7 +42,7 @@ public class PlatformSpawnerScript : MonoBehaviour {
 	 * 		10% chance moving
 	 */ 
 	GameObject basicPlatformScheme() {
-        return PlatformScheme(80, 10, 10);
+        return PlatformScheme(60, 10, 10, 20);
 	}
 
     /**
@@ -73,14 +73,13 @@ public class PlatformSpawnerScript : MonoBehaviour {
                 {
                     if (didWeFlip)
                     {
-                        didWeFlip = false;
                         flipCounter = 0;
                     }
                     else
                     {
-                        didWeFlip = true;
                         flipCounter++;
                     }
+					didWeFlip = !didWeFlip;
                 }
 
                 return platformPrefabs[i];
