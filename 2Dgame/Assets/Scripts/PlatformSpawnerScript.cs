@@ -45,28 +45,12 @@ public class PlatformSpawnerScript : MonoBehaviour {
         return PlatformScheme(80, 10, 10);
 	}
 
-    /// <summary>
-    /// Modifiable PlatformScheme
-    /// Useful when scaling difficulty
-    /// </summary>
-    /// <param name="percentNormal"></param>
-    /// <param name="percentTrampoline"></param>
-    /// <param name="percentMoving"></param>
-    /// <returns>Returns a platformsprefab</returns>
-    GameObject PlatformScheme(int percentNormal, int percentTrampoline, int percentMoving)
-    {
-        return PlatformScheme(percentNormal, percentTrampoline, percentMoving, 0);
-    }
-
-    /// <summary>
-    /// With flipplatform
-    /// </summary>
-    /// <param name="percentNormal"></param>
-    /// <param name="percentTrampoline"></param>
-    /// <param name="percentMoving"></param>
-    /// <param name="percentFlip"></param>
-    /// <returns></returns>
-    GameObject PlatformScheme(int percentNormal, int percentTrampoline, int percentMoving, int percentFlip)
+    /**
+     * Platformscheme with a variable amount of parameters.
+     * 
+     * Returns a platform prefab.
+     */
+    GameObject PlatformScheme(params int[] percentages)
     {
         if (didWeFlip)
         {
@@ -79,32 +63,28 @@ public class PlatformSpawnerScript : MonoBehaviour {
         }
 
         int randomInt = Random.Range(0, 100);
-        if (randomInt < percentNormal)
+        int percentageCounter = 0;
+        for (int i = 0; i < percentages.Length; i++)
         {
-            return platformPrefabs[0];
-        }
-        else if (randomInt < percentNormal + percentMoving)
-        {
-            return platformPrefabs[1];
-        }
-        else if (randomInt < percentNormal + percentMoving + percentTrampoline)
-        {
-            return platformPrefabs[2];
-        }
-        else if (randomInt < percentNormal + percentMoving + percentTrampoline + percentFlip)
-        {
-            if (didWeFlip)
+            percentageCounter += percentages[i];
+            if (randomInt < percentageCounter)
             {
-                didWeFlip = false;
-                flipCounter = 0;
+                if (i == 3)
+                {
+                    if (didWeFlip)
+                    {
+                        didWeFlip = false;
+                        flipCounter = 0;
+                    }
+                    else
+                    {
+                        didWeFlip = true;
+                        flipCounter++;
+                    }
+                }
+
+                return platformPrefabs[i];
             }
-            else
-            {
-                didWeFlip = true;
-                flipCounter++;
-            }
-            
-            return platformPrefabs[3];
         }
         return platformPrefabs[0];
     }
@@ -118,15 +98,15 @@ public class PlatformSpawnerScript : MonoBehaviour {
     {
         if (this.transform.position.y < 500)
         {
-            return PlatformScheme(90, 0, 0, 10);
+            return basicPlatformScheme();
         }
         else if (this.transform.position.y < 800)
         {
-            return PlatformScheme(45, 10, 45);
+            return PlatformScheme(45, 45, 10);
         }
         else if (this.transform.position.y < 1000)
         {
-            return PlatformScheme(0, 0, 100); // First all moving
+            return PlatformScheme(0, 100); // First all moving
         }
         else if (this.transform.position.y < 1200)
         {
@@ -134,7 +114,7 @@ public class PlatformSpawnerScript : MonoBehaviour {
         }
         else if (this.transform.position.y < 5000)
         {
-            return PlatformScheme(5, 5, 70, 20); // More hard stuff
+            return PlatformScheme(5, 70, 5, 20); // More hard stuff
         }
         else
         {
