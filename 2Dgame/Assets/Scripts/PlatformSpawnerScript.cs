@@ -58,15 +58,12 @@ public class PlatformSpawnerScript : MonoBehaviour {
         return PlatformScheme(percentNormal, percentTrampoline, percentMoving, 0);
     }
 
-    /// <summary>
-    /// With flipplatform
-    /// </summary>
-    /// <param name="percentNormal"></param>
-    /// <param name="percentTrampoline"></param>
-    /// <param name="percentMoving"></param>
-    /// <param name="percentFlip"></param>
-    /// <returns></returns>
-    GameObject PlatformScheme(int percentNormal, int percentTrampoline, int percentMoving, int percentFlip)
+    /**
+     * Platformscheme with a variable amount of parameters.
+     * 
+     * Returns a platform prefab.
+     */
+    GameObject PlatformScheme(params int[] percentages)
     {
         if (didWeFlip)
         {
@@ -79,32 +76,28 @@ public class PlatformSpawnerScript : MonoBehaviour {
         }
 
         int randomInt = Random.Range(0, 100);
-        if (randomInt < percentNormal)
+        int percentageCounter = 0;
+        for (int i = 0; i < percentages.Length; i++)
         {
-            return platformPrefabs[0];
-        }
-        else if (randomInt < percentNormal + percentMoving)
-        {
-            return platformPrefabs[1];
-        }
-        else if (randomInt < percentNormal + percentMoving + percentTrampoline)
-        {
-            return platformPrefabs[2];
-        }
-        else if (randomInt < percentNormal + percentMoving + percentTrampoline + percentFlip)
-        {
-            if (didWeFlip)
+            percentageCounter += percentages[i];
+            if (randomInt < percentageCounter)
             {
-                didWeFlip = false;
-                flipCounter = 0;
+                if (i == 3)
+                {
+                    if (didWeFlip)
+                    {
+                        didWeFlip = false;
+                        flipCounter = 0;
+                    }
+                    else
+                    {
+                        didWeFlip = true;
+                        flipCounter++;
+                    }
+                }
+
+                return platformPrefabs[i];
             }
-            else
-            {
-                didWeFlip = true;
-                flipCounter++;
-            }
-            
-            return platformPrefabs[3];
         }
         return platformPrefabs[0];
     }
