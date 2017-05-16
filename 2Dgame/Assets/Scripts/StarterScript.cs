@@ -7,12 +7,20 @@ public class StarterScript : MonoBehaviour {
 	public GameControllerScript gcs;
 	public Text countdown;
 	public Rigidbody2D player;
+	public AudioSource audioSource;
 
 	float shootSpeed = 70f;
 
 	void Start () {
 		gcs = GameObject.Find("GameController").GetComponent<GameControllerScript>();
 		StartCoroutine (DelayedStart());
+	}
+
+	void Update() {
+		float diff = Camera.main.transform.position.y - this.transform.position.y;
+		if (diff > 25f) {
+			Destroy (this.gameObject);
+		}
 	}
 
 	IEnumerator DelayedStart() {
@@ -29,5 +37,6 @@ public class StarterScript : MonoBehaviour {
 
 		countdown.gameObject.SetActive (false);
 		player.velocity = new Vector2 (0, shootSpeed);
+		audioSource.Play ();
 	}
 }
