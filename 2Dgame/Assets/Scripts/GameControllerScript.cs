@@ -17,6 +17,7 @@ public class GameControllerScript : MonoBehaviour {
 	public GameObject scoreOnGameOver;
 	public InputField nameInput;
 	public Button sendHighscore;
+    public Transform cameraTransform;
 
 	public Button sendButton;
 	public Sprite pauseSprite;
@@ -25,18 +26,22 @@ public class GameControllerScript : MonoBehaviour {
 	public Sprite enterName;
 	public Sprite enterNameHi;
 
+    private bool straight;
+
 	void Start() {
 		#if (UNITY_ANDROID || UNITY_IOS)
 		Screen.sleepTimeout = SleepTimeout.NeverSleep;
 		#endif
 		isPaused = false;
 		sendHighscore.interactable = true;
+        straight = true;
 	}
 
 	void Update () {
 		if (isPaused) {
 			return;
 		}
+        this.transform.position = cameraTransform.position;
 		UpdateScore ();
 	}
 
@@ -122,4 +127,28 @@ public class GameControllerScript : MonoBehaviour {
 	}
 
 	// Button press-methods
+
+
+    /**
+     * Rotates the camera smooooth
+     *
+     */ 
+    public IEnumerator RotateCameraSmooth()
+    {
+        PauseUnPauseGame();
+        for (float t = 0.0f; t < 1.0f; t += Time.deltaTime)
+        {
+            if (straight)
+            {
+                cameraTransform.rotation = Quaternion.Lerp(cameraTransform.rotation, Quaternion.Euler(0, 0, 180), t);
+            }
+            else
+            {
+                cameraTransform.rotation = Quaternion.Lerp(cameraTransform.rotation, Quaternion.Euler(0, 0, 0), t);
+            }
+            yield return new WaitForEndOfFrame();
+        }
+        straight = !straight;
+        PauseUnPauseGame();
+    }
 }
