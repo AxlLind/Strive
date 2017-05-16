@@ -58,6 +58,7 @@
      <Compile Include="Assets\Scripts\PlayerScript.cs" />
      <Compile Include="Assets\Scripts\SettingsScreenController.cs" />
      <Compile Include="Assets\Scripts\StartScreenController.cs" />
+     <Compile Include="Assets\Scripts\StarterScript.cs" />
      <Compile Include="Assets\Scripts\TrampolineScript.cs" />
      <None Include="Assets\Firebase\m2repository\com\google\firebase\firebase-auth-unity\maven-metadata.xml" />
      <None Include="Assets\Firebase\Editor\FirebaseAuth.txt" />

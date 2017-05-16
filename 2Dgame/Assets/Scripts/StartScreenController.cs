@@ -5,6 +5,18 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class StartScreenController : MonoBehaviour {
+
+	void Start() {
+		string sound = PlayerPrefs.GetString ("Sound");
+		string music = PlayerPrefs.GetString ("Music");
+		if (sound == "") {
+			PlayerPrefs.SetString ("Sound", "True");
+		}
+		if (music == "") {
+			PlayerPrefs.SetString ("Music", "True");
+		}
+	}
+
 	public void OnClickStartButton() {
 		SceneManager.LoadScene("Main_Game");
 	}

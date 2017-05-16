@@ -39,7 +39,6 @@ public class GameControllerScript : MonoBehaviour {
 		#if (UNITY_ANDROID || UNITY_IOS)
 		Screen.sleepTimeout = SleepTimeout.NeverSleep;
 		#endif
-		isPaused = false;
 		sendHighscore.interactable = true;
         straight = true;
 

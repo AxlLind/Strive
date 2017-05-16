@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlatformMoverScript : PlatformScript {
 
-    public float speed;
+    float speed = 4f;
     bool movingRight;
 
     /**
@@ -43,7 +43,7 @@ public class PlatformMoverScript : PlatformScript {
         }
 
         float directionSpeed = movingRight ? speed : -speed;
-        transform.position = new Vector2(transform.position.x + directionSpeed, transform.position.y);
+		transform.position = new Vector2(transform.position.x + directionSpeed * Time.deltaTime, transform.position.y);
     }
 
 
