@@ -26,6 +26,9 @@ public class GameControllerScript : MonoBehaviour {
 	public Sprite enterName;
 	public Sprite enterNameHi;
 
+	public TextMesh highscoreText;
+	public Transform scoreLine;
+
     private bool straight;
 
 	void Start() {
@@ -35,6 +38,10 @@ public class GameControllerScript : MonoBehaviour {
 		isPaused = false;
 		sendHighscore.interactable = true;
         straight = true;
+
+		int highscore = PlayerPrefs.GetInt ("LocalScore");
+		scoreLine.position = new Vector2 (scoreLine.position.x, highscore);
+		highscoreText.text = "Highscore: " + highscore;
 	}
 
 	void Update () {

@@ -17,6 +17,7 @@ public class DeathScript : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D other) {
 		// Called when player loses:
 		gameOverScreen.SetActive(true);
+
 		int bestScore = PlayerPrefs.GetInt ("LocalScore");
 		if (bestScore < gcs.score) {
 			PlayerPrefs.SetInt ("LocalScore", gcs.score);
@@ -24,8 +25,7 @@ public class DeathScript : MonoBehaviour {
 		} else {
 			gameOverScore.text = "Score: " + gcs.score;
 		}
+
 		gcs.PauseUnPauseGame ();
-
-
 	}
 }
