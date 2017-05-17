@@ -4,6 +4,8 @@ This is a infinite jumper game. The theme idea is
 platform for the game is mobile, both android and iOS, using the gyroscope
 accelerometer for controls.
 
+Developed by Axel Lindeberg and Jonatan Cerwall. Music by Pontus Mjöberg.
+
 #### How to install
 For android the process is quite easy. Simply download the [apk
 here](https://github.com/AxlLind/2D-platformer/raw/master/JumperGame.apk) and
