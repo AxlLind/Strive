@@ -73,14 +73,13 @@ public class PlatformSpawnerScript : MonoBehaviour {
                 {
                     if (didWeFlip)
                     {
-                        didWeFlip = false;
                         flipCounter = 0;
                     }
                     else
                     {
-                        didWeFlip = true;
                         flipCounter++;
                     }
+					didWeFlip = !didWeFlip;
                 }
 
                 return platformPrefabs[i];

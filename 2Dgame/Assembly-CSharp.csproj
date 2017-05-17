@@ -48,18 +48,19 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\CameraScript.cs" />
      <Compile Include="Assets\Scripts\DeathScript.cs" />
-     <Compile Include="Assets\Scripts\FlipPlatformScript.cs" />
      <Compile Include="Assets\Scripts\GameControllerScript.cs" />
      <Compile Include="Assets\Scripts\Highscore.cs" />
-     <Compile Include="Assets\Scripts\HighscoreScreenController.cs" />
-     <Compile Include="Assets\Scripts\PlatformMoverScript.cs" />
-     <Compile Include="Assets\Scripts\PlatformScript.cs" />
+     <Compile Include="Assets\Scripts\MenuPlayerScript.cs" />
+     <Compile Include="Assets\Scripts\Platform Scripts\FlipPlatformScript.cs" />
+     <Compile Include="Assets\Scripts\Platform Scripts\PlatformMoverScript.cs" />
+     <Compile Include="Assets\Scripts\Platform Scripts\PlatformScript.cs" />
+     <Compile Include="Assets\Scripts\Platform Scripts\TrampolineScript.cs" />
      <Compile Include="Assets\Scripts\PlatformSpawnerScript.cs" />
      <Compile Include="Assets\Scripts\PlayerScript.cs" />
-     <Compile Include="Assets\Scripts\SettingsScreenController.cs" />
-     <Compile Include="Assets\Scripts\StartScreenController.cs" />
+     <Compile Include="Assets\Scripts\Scene Controllers\HighscoreScreenController.cs" />
+     <Compile Include="Assets\Scripts\Scene Controllers\SettingsScreenController.cs" />
+     <Compile Include="Assets\Scripts\Scene Controllers\StartScreenController.cs" />
      <Compile Include="Assets\Scripts\StarterScript.cs" />
-     <Compile Include="Assets\Scripts\TrampolineScript.cs" />
      <None Include="Assets\Firebase\m2repository\com\google\firebase\firebase-auth-unity\maven-metadata.xml" />
      <None Include="Assets\Firebase\Editor\FirebaseAuth.txt" />
      <None Include="Assets\PlayServicesResolver\proguard-unity.txt" />

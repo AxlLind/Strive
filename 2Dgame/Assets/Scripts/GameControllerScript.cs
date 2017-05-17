@@ -12,6 +12,7 @@ public class GameControllerScript : MonoBehaviour {
 	public static bool isPaused;
 	public static bool soundOn;
 	public static bool musicOn;
+	public static bool straight;
 
 	public Text scoreText;
 	public Rigidbody2D playerRB;
@@ -33,8 +34,6 @@ public class GameControllerScript : MonoBehaviour {
 	public TextMesh highscoreText;
 	public Transform scoreLine;
 
-    private bool straight;
-
 	void Start() {
 		#if (UNITY_ANDROID || UNITY_IOS)
 		Screen.sleepTimeout = SleepTimeout.NeverSleep;
@@ -43,7 +42,8 @@ public class GameControllerScript : MonoBehaviour {
         straight = true;
 
 		int highscore = PlayerPrefs.GetInt ("LocalScore");
-		scoreLine.position = new Vector2 (scoreLine.position.x, highscore);
+		int y = highscore == 0 ? -100 : highscore;
+		scoreLine.position = new Vector2 (scoreLine.position.x, y);
 		highscoreText.text = "Highscore: " + highscore;
 
 		string sound = PlayerPrefs.GetString ("Sound");
@@ -153,19 +153,15 @@ public class GameControllerScript : MonoBehaviour {
     public IEnumerator RotateCameraSmooth()
     {
         PauseUnPauseGame();
+
+		float angle = straight ? 180 : 0;
         for (float t = 0.0f; t < 1.0f; t += Time.deltaTime)
         {
-            if (straight)
-            {
-                cameraTransform.rotation = Quaternion.Lerp(cameraTransform.rotation, Quaternion.Euler(0, 0, 180), t);
-            }
-            else
-            {
-                cameraTransform.rotation = Quaternion.Lerp(cameraTransform.rotation, Quaternion.Euler(0, 0, 0), t);
-            }
+            cameraTransform.rotation = Quaternion.Lerp(cameraTransform.rotation, Quaternion.Euler(0, 0, angle), t);
             yield return new WaitForEndOfFrame();
         }
         straight = !straight;
+
         PauseUnPauseGame();
     }
 }
