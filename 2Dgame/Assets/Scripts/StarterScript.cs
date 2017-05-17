@@ -37,6 +37,8 @@ public class StarterScript : MonoBehaviour {
 
 		countdown.gameObject.SetActive (false);
 		player.velocity = new Vector2 (0, shootSpeed);
-		audioSource.Play ();
+		if (GameControllerScript.soundOn) {
+			audioSource.Play ();
+		}
 	}
 }
