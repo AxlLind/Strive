@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class StarterScript : MonoBehaviour {
 	public GameControllerScript gcs;
+	public GameObject pauseButton;
 	public Text countdown;
 	public Rigidbody2D player;
 	public AudioSource audioSource;
@@ -37,6 +38,7 @@ public class StarterScript : MonoBehaviour {
 
 		countdown.gameObject.SetActive (false);
 		player.velocity = new Vector2 (0, shootSpeed);
+		pauseButton.SetActive (true);
 		if (GameControllerScript.soundOn) {
 			audioSource.Play ();
 		}

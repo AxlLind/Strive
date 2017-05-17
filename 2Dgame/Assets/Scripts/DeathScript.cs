@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class DeathScript : MonoBehaviour {
 
 	public GameObject gameOverScreen;
+	public GameObject pauseButton;
 	public GameControllerScript gcs;
 	public Text gameOverScore;
 
@@ -17,6 +18,7 @@ public class DeathScript : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D other) {
 		// Called when player loses:
 		gameOverScreen.SetActive(true);
+		pauseButton.SetActive (false);
 
 		int bestScore = PlayerPrefs.GetInt ("LocalScore");
 		if (bestScore < gcs.score) {
