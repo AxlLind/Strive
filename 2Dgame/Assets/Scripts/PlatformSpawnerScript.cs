@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlatformSpawnerScript : MonoBehaviour {
 
-	float yPosAtLastSpawn;
+	float yPosAtLastSpawn = 5f;
 	float distanceBetween = 3.2f;
 	float lastXPos = 0;
     int flipCounter = 0;
@@ -18,10 +18,9 @@ public class PlatformSpawnerScript : MonoBehaviour {
 			return;
 		}
 
-		float y = Camera.main.transform.position.y;
-		if (y - yPosAtLastSpawn > distanceBetween) {
+		if (yPosAtLastSpawn + distanceBetween < Camera.main.transform.position.y) {
 			spawnPlatform ();
-			yPosAtLastSpawn = y;
+			yPosAtLastSpawn += distanceBetween;
 		}
 	}
 
@@ -30,7 +29,7 @@ public class PlatformSpawnerScript : MonoBehaviour {
 	 */
 	void spawnPlatform() {
 		GameObject platformType = choosePlatform ();
-		Vector2 pos = new Vector2(correctX(), transform.position.y);
+		Vector2 pos = new Vector2(correctX(), yPosAtLastSpawn + distanceBetween + 15f);
 		GameObject go = Instantiate (platformType, pos, Quaternion.identity);
 		go.transform.parent = platformParent;
 	}
