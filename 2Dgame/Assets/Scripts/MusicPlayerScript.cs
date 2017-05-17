@@ -8,6 +8,8 @@ public class MusicPlayerScript : MonoBehaviour
 
     static bool alreadyExists;
 
+    private AudioSource audioSource;
+
     void Start()
     {
         if (alreadyExists)
@@ -18,6 +20,12 @@ public class MusicPlayerScript : MonoBehaviour
         {
             DontDestroyOnLoad(gameObject);
             alreadyExists = true;
+            audioSource = GetComponent<AudioSource>();
+
+            if (!GameControllerScript.musicOn)
+            {
+                audioSource.Pause();
+            }
         }
     }
 
