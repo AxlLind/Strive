@@ -51,6 +51,7 @@
      <Compile Include="Assets\Scripts\GameControllerScript.cs" />
      <Compile Include="Assets\Scripts\Highscore.cs" />
      <Compile Include="Assets\Scripts\MenuPlayerScript.cs" />
+     <Compile Include="Assets\Scripts\MusicPlayerScript.cs" />
      <Compile Include="Assets\Scripts\Platform Scripts\FlipPlatformScript.cs" />
      <Compile Include="Assets\Scripts\Platform Scripts\PlatformMoverScript.cs" />
      <Compile Include="Assets\Scripts\Platform Scripts\PlatformScript.cs" />
