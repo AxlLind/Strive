@@ -6,7 +6,6 @@ public class CameraScript : MonoBehaviour {
 
 	float standardSpeed = 5.4f;
 	float scrollSpeed;
-	bool startedMoving = false;
 
 	public Rigidbody2D target;
 
@@ -14,13 +13,7 @@ public class CameraScript : MonoBehaviour {
 		if (GameControllerScript.isPaused) {
 			return;
 		}
-		if (!startedMoving && target.position.y > 0f) {
-			startedMoving = true;
-		}
-
-		if (startedMoving) {
-			ScrollUp ();
-		}
+		ScrollUp ();
 	}
 
 	/**
