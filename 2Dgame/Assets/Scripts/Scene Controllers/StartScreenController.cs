@@ -28,4 +28,8 @@ public class StartScreenController : MonoBehaviour {
 	public void OnClickHighScoreButton() {
 		SceneManager.LoadScene("Highscore_Screen");
 	}
+
+	public void OnClickCreditsButton() {
+		SceneManager.LoadScene("Credits_Screen");
+	}
 }
