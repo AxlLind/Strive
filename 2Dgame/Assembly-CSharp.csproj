@@ -48,7 +48,6 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\CameraScript.cs" />
      <Compile Include="Assets\Scripts\DeathScript.cs" />
-     <Compile Include="Assets\Scripts\GameControllerScript.cs" />
      <Compile Include="Assets\Scripts\Highscore.cs" />
      <Compile Include="Assets\Scripts\MenuPlayerScript.cs" />
      <Compile Include="Assets\Scripts\MusicPlayerScript.cs" />
@@ -58,6 +57,8 @@
      <Compile Include="Assets\Scripts\Platform Scripts\TrampolineScript.cs" />
      <Compile Include="Assets\Scripts\PlatformSpawnerScript.cs" />
      <Compile Include="Assets\Scripts\PlayerScript.cs" />
+     <Compile Include="Assets\Scripts\Scene Controllers\CreditsScreenController.cs" />
+     <Compile Include="Assets\Scripts\Scene Controllers\GameControllerScript.cs" />
      <Compile Include="Assets\Scripts\Scene Controllers\HighscoreScreenController.cs" />
      <Compile Include="Assets\Scripts\Scene Controllers\SettingsScreenController.cs" />
      <Compile Include="Assets\Scripts\Scene Controllers\StartScreenController.cs" />
