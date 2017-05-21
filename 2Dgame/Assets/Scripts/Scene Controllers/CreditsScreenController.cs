@@ -5,6 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class CreditsScreenController : MonoBehaviour {
 	public void OnClickBackButton() {
-		SceneManager.LoadScene ("Start_Screen");
+		SceneManager.LoadScene ("Settings_Screen");
 	}
 }
