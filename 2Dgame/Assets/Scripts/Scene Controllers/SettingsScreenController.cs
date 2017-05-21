@@ -26,6 +26,10 @@ public class SettingsScreenController : MonoBehaviour {
 		SceneManager.LoadScene ("Start_Screen");
 	}
 
+	public void OnClickCreditsButton() {
+		SceneManager.LoadScene ("Credits_Screen");
+	}
+
 	public void OnToggleSound() {
 		PlayerPrefs.SetString("Sound", soundToggle.isOn ? "True" : "False");
 	}
