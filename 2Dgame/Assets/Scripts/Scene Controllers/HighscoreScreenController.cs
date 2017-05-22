@@ -70,10 +70,16 @@ public class HighscoreScreenController : MonoBehaviour {
 			}
 			else if (task.IsCompleted) {
 				foreach(var child in task.Result.Children) {
+					long max = long.MinValue;
+					string name = "";
 					foreach(var hs in child.Children) {
-						// should only be one interation in the inner loop
-						leaderBoard.Add( new Highscore(hs.Key, (long) hs.Value) );
+						long score = (long) hs.Value;
+						if (max < score) {
+							max = score;
+							name = hs.Key;
+						}
 					}
+					leaderBoard.Add( new Highscore(name, max) );
 				}
 				leaderBoard.Sort();
 				updateHighscoreBoard();
