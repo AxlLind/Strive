@@ -101,6 +101,7 @@ public class GameControllerScript : MonoBehaviour {
 			SendHighscore();
 		} else {
 			nameInput.gameObject.SetActive (true);
+			nameInput.text = PlayerPrefs.GetString ("UserName");
 			scoreOnGameOver.SetActive (false);
 		}
 	}
@@ -115,6 +116,7 @@ public class GameControllerScript : MonoBehaviour {
 	public void SendHighscore() {
 		string name = nameInput.text.Trim();
 		if (name.Length > 0) {
+			PlayerPrefs.SetString ("UserName", name);
 			FirebaseApp.DefaultInstance.SetEditorDatabaseUrl ("https://jumperunitygame.firebaseio.com/");
 			DatabaseReference highscoreRef = FirebaseDatabase.DefaultInstance.GetReference ("Highscores");
 			string userID = PlayerPrefs.GetString ("UserID");
