@@ -121,7 +121,7 @@ public class GameControllerScript : MonoBehaviour {
 			DatabaseReference highscoreRef = FirebaseDatabase.DefaultInstance.GetReference ("Highscores");
 			string userID = PlayerPrefs.GetString ("UserID");
 
-			highscoreRef.Child( userID ).Child( name ).SetValueAsync( score );
+			highscoreRef.Child( userID ).Child( RandomLong().ToString() ).Child( name ).SetValueAsync( score );
 
 			nameInput.gameObject.SetActive (false);
 			scoreOnGameOver.SetActive (true);
@@ -131,6 +131,17 @@ public class GameControllerScript : MonoBehaviour {
 			Sprite spr = sendButton.spriteState.highlightedSprite; 
 			spr = enterNameHi;
 		}
+	}
+
+	/**
+	 * Generates a random long number
+	 * (how does C# NOT have a built in function for this?!)
+	 * Used to generate userID.
+	 */
+	private long RandomLong() {
+		int a = Random.Range (int.MinValue, int.MaxValue);
+		int b = Random.Range (int.MinValue, int.MaxValue);
+		return ((long) a) << 32 + b;
 	}
 
 	// Button press-methods
