@@ -69,11 +69,19 @@ public class HighscoreScreenController : MonoBehaviour {
 				Debug.Log("Firebase FAILED");
 			}
 			else if (task.IsCompleted) {
-				foreach(var child in task.Result.Children) {
-					foreach(var hs in child.Children) {
-						// should only be one interation in the inner loop
-						leaderBoard.Add( new Highscore(hs.Key, (long) hs.Value) );
+				foreach(var user in task.Result.Children) {
+					long max = long.MinValue;
+					string name = "";
+					foreach(var score in user.Children) {
+						foreach(var hs in score.Children) {
+							long current = (long) hs.Value;
+							if (max < current) {
+								max = current;
+								name = hs.Key;
+							}
+						}
 					}
+					leaderBoard.Add( new Highscore(name, max) );
 				}
 				leaderBoard.Sort();
 				updateHighscoreBoard();

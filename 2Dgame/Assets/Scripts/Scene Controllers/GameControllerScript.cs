@@ -80,19 +80,6 @@ public class GameControllerScript : MonoBehaviour {
 		playerRB.simulated = isPaused ? false : true;
 	}
 
-	/**
-	 * Generates a random long number
-	 * (how does C# NOT have a built in function for this?!)
-	 * Used as an ID for high score submissions.
-	 */
-	private long RandomLong() {
-		int a = Random.Range (int.MinValue, int.MaxValue);
-		int b = Random.Range (int.MinValue, int.MaxValue);
-		return ((long) a) << 32 + b;
-	}
-
-
-
 	// Button press-methods
 
 	public void OnClickPause(Image img) {
@@ -114,6 +101,7 @@ public class GameControllerScript : MonoBehaviour {
 			SendHighscore();
 		} else {
 			nameInput.gameObject.SetActive (true);
+			nameInput.text = PlayerPrefs.GetString ("UserName");
 			scoreOnGameOver.SetActive (false);
 		}
 	}
@@ -128,10 +116,12 @@ public class GameControllerScript : MonoBehaviour {
 	public void SendHighscore() {
 		string name = nameInput.text.Trim();
 		if (name.Length > 0) {
+			PlayerPrefs.SetString ("UserName", name);
 			FirebaseApp.DefaultInstance.SetEditorDatabaseUrl ("https://jumperunitygame.firebaseio.com/");
 			DatabaseReference highscoreRef = FirebaseDatabase.DefaultInstance.GetReference ("Highscores");
+			string userID = PlayerPrefs.GetString ("UserID");
 
-			highscoreRef.Child( RandomLong().ToString() ).Child( name ).SetValueAsync( score );
+			highscoreRef.Child( userID ).Child( RandomLong().ToString() ).Child( name ).SetValueAsync( score );
 
 			nameInput.gameObject.SetActive (false);
 			scoreOnGameOver.SetActive (true);
@@ -141,6 +131,17 @@ public class GameControllerScript : MonoBehaviour {
 			Sprite spr = sendButton.spriteState.highlightedSprite; 
 			spr = enterNameHi;
 		}
+	}
+
+	/**
+	 * Generates a random long number
+	 * (how does C# NOT have a built in function for this?!)
+	 * Used to generate userID.
+	 */
+	private long RandomLong() {
+		int a = Random.Range (int.MinValue, int.MaxValue);
+		int b = Random.Range (int.MinValue, int.MaxValue);
+		return ((long) a) << 32 + b;
 	}
 
 	// Button press-methods
