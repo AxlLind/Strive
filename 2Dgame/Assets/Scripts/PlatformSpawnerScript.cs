@@ -7,13 +7,17 @@ public class PlatformSpawnerScript : MonoBehaviour {
 	float yPosAtLastSpawn = 5f;
 	float distanceBetween = 3.2f;
 	float lastXPos = 0;
-    int flipCounter = 0;
-    bool didWeFlip = false;
+    Queue prefabqueue;
 
     public GameObject[] platformPrefabs;
 	public Transform platformParent;
 
-	void Update() {
+    private void Awake()
+    {
+        prefabqueue = new Queue();
+    }
+
+    void Update() {
 		if (GameControllerScript.isPaused) {
 			return;
 		}
@@ -28,9 +32,10 @@ public class PlatformSpawnerScript : MonoBehaviour {
 	 * Spawns a random platform type at a random x-position.
 	 */
 	void spawnPlatform() {
-		GameObject platformType = choosePlatform ();
+        choosePlatform();
+        GameObject platformType = (GameObject) prefabqueue.Dequeue();
 		Vector2 pos = new Vector2(correctX(), yPosAtLastSpawn + distanceBetween + 15f);
-		GameObject go = Instantiate (platformType, pos, Quaternion.identity);
+        GameObject go = Instantiate(platformType, pos, Quaternion.identity);
 		go.transform.parent = platformParent;
 	}
 
@@ -40,8 +45,8 @@ public class PlatformSpawnerScript : MonoBehaviour {
 	 * 		10% chance trampoline
 	 * 		10% chance moving
 	 */ 
-	GameObject basicPlatformScheme() {
-        return PlatformScheme(80, 10, 10);
+	void basicPlatformScheme() {
+        PlatformScheme(80, 10, 10);
 	}
 
     /**
@@ -49,18 +54,8 @@ public class PlatformSpawnerScript : MonoBehaviour {
      * 
      * Returns a platform prefab.
      */
-    GameObject PlatformScheme(params int[] percentages)
+    void PlatformScheme(params int[] percentages)
     {
-        if (didWeFlip)
-        {
-            flipCounter++;
-            if (flipCounter % 6 == 0)
-            {
-                didWeFlip = false;
-                return platformPrefabs[3];
-            }
-        }
-
         int randomInt = Random.Range(0, 100);
         int percentageCounter = 0;
         for (int i = 0; i < percentages.Length; i++)
@@ -68,23 +63,18 @@ public class PlatformSpawnerScript : MonoBehaviour {
             percentageCounter += percentages[i];
             if (randomInt < percentageCounter)
             {
+                prefabqueue.Enqueue(platformPrefabs[i]);
                 if (i == 3)
                 {
-                    if (didWeFlip)
+                    for (int j = 0; j < 3; j++)
                     {
-                        flipCounter = 0;
+                        prefabqueue.Enqueue(platformPrefabs[1]);
                     }
-                    else
-                    {
-                        flipCounter++;
-                    }
-					didWeFlip = !didWeFlip;
+                    prefabqueue.Enqueue(platformPrefabs[3]);
                 }
-
-                return platformPrefabs[i];
+                return;
             }
         }
-        return platformPrefabs[0];
     }
 
     /**
@@ -92,31 +82,37 @@ public class PlatformSpawnerScript : MonoBehaviour {
      * Is the game's primary progressionsystem.
      * Difficulty increases as score increases.
      */
-    GameObject choosePlatform()
+    void choosePlatform()
     {
         if (this.transform.position.y < 200)
         {
-            return basicPlatformScheme();
+            basicPlatformScheme();
+            return;
         }
         else if (this.transform.position.y < 500)
         {
-            return PlatformScheme(45, 45, 10);
+            PlatformScheme(45, 45, 10);
+            return;
         }
         else if (this.transform.position.y < 700)
         {
-            return PlatformScheme(0, 100); // First all moving
+            PlatformScheme(0, 100); // First all moving
+            return;
         }
         else if (this.transform.position.y < 1000)
         {
-            return PlatformScheme(60, 20, 10, 10); // Flips
+            PlatformScheme(60, 20, 10, 10); // Flips
+            return;
         }
         else if (this.transform.position.y < 1500)
         {
-            return PlatformScheme(45, 40, 5, 10); // More hard stuff
+            PlatformScheme(45, 40, 5, 10); // More hard stuff
+            return;
         }
         else
         {
-            return PlatformScheme(0, 85, 5, 10); // Fliptastic
+            PlatformScheme(0, 85, 5, 10); // Fliptastic
+            return;
         }
     }
 
