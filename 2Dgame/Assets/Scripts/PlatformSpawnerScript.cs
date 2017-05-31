@@ -72,6 +72,13 @@ public class PlatformSpawnerScript : MonoBehaviour {
                     }
                     prefabqueue.Enqueue(platformPrefabs[3]);
                 }
+                else if (i == 4)
+                {
+                    for (int j = 0; j < 3; j++)
+                    {
+                        prefabqueue.Enqueue(platformPrefabs[5]);
+                    }
+                }
                 return;
             }
         }
@@ -106,12 +113,12 @@ public class PlatformSpawnerScript : MonoBehaviour {
         }
         else if (this.transform.position.y < 1500)
         {
-            PlatformScheme(45, 40, 5, 10); // More hard stuff
+            PlatformScheme(30, 40, 5, 15, 10); // More hard stuff, first blink
             return;
         }
         else
         {
-            PlatformScheme(0, 85, 5, 10); // Fliptastic
+            PlatformScheme(0, 80, 5, 10, 5); // Fliptastic
             return;
         }
     }
