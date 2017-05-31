@@ -46,7 +46,7 @@ public class PlatformSpawnerScript : MonoBehaviour {
 	 * 		10% chance moving
 	 */ 
 	void basicPlatformScheme() {
-        PlatformScheme(30, 40, 5, 15, 10);
+        PlatformScheme(80, 10, 10);
 	}
 
     /**
