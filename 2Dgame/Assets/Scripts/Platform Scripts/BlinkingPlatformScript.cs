@@ -57,7 +57,11 @@ public class BlinkingPlatformScript : PlatformScript {
         bool boolean = false;
         for (int i = 0; i < 7; i++)
         {
-            renderer.enabled = boolean;
+            if (renderer != null)
+            {
+                renderer.enabled = boolean;
+            }
+
             yield return new WaitForSeconds(0.1f);
             boolean = !boolean;
         }

@@ -46,7 +46,7 @@ public class PlatformSpawnerScript : MonoBehaviour {
 	 * 		10% chance moving
 	 */ 
 	void basicPlatformScheme() {
-        PlatformScheme(80, 10, 10);
+        PlatformScheme(30, 40, 5, 15, 10);
 	}
 
     /**
@@ -68,7 +68,7 @@ public class PlatformSpawnerScript : MonoBehaviour {
                 {
                     for (int j = 0; j < 3; j++)
                     {
-                        prefabqueue.Enqueue(platformPrefabs[1]);
+                        prefabqueue.Enqueue(platformPrefabs[0]);
                     }
                     prefabqueue.Enqueue(platformPrefabs[3]);
                 }
@@ -94,32 +94,26 @@ public class PlatformSpawnerScript : MonoBehaviour {
         if (this.transform.position.y < 200)
         {
             basicPlatformScheme();
-            return;
         }
         else if (this.transform.position.y < 500)
         {
             PlatformScheme(45, 45, 10);
-            return;
         }
         else if (this.transform.position.y < 700)
         {
             PlatformScheme(0, 100); // First all moving
-            return;
         }
         else if (this.transform.position.y < 1000)
         {
             PlatformScheme(60, 20, 10, 10); // Flips
-            return;
         }
         else if (this.transform.position.y < 1500)
         {
             PlatformScheme(30, 40, 5, 15, 10); // More hard stuff, first blink
-            return;
         }
         else
         {
             PlatformScheme(0, 80, 5, 10, 5); // Fliptastic
-            return;
         }
     }
 
