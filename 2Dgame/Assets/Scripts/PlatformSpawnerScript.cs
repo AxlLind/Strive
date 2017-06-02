@@ -5,10 +5,10 @@ using UnityEngine;
 public class PlatformSpawnerScript : MonoBehaviour {
 
 	float yPosAtLastSpawn = 5f;
-	float distanceBetween = 3.2f;
 	float lastXPos = 0;
     Queue prefabqueue;
 
+    public float distanceBetween = 3.2f;
     public GameObject[] platformPrefabs;
 	public Transform platformParent;
 
@@ -32,7 +32,10 @@ public class PlatformSpawnerScript : MonoBehaviour {
 	 * Spawns a random platform type at a random x-position.
 	 */
 	void spawnPlatform() {
-        choosePlatform();
+        if (prefabqueue.Count == 0)
+        {
+            choosePlatform();
+        }
         GameObject platformType = (GameObject) prefabqueue.Dequeue();
 		Vector2 pos = new Vector2(correctX(), yPosAtLastSpawn + distanceBetween + 15f);
         GameObject go = Instantiate(platformType, pos, Quaternion.identity);
@@ -46,7 +49,7 @@ public class PlatformSpawnerScript : MonoBehaviour {
 	 * 		10% chance moving
 	 */ 
 	void basicPlatformScheme() {
-        PlatformScheme(30, 40, 5, 15, 10);
+        PlatformScheme(0, 0, 0, 0, 100);
 	}
 
     /**

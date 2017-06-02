@@ -107,6 +107,7 @@
     <Compile Include="Assets\Scripts\Platform Scripts\BlinkerScript.cs" />
     <Compile Include="Assets\Scripts\Platform Scripts\BlinkingPlatformScript.cs" />
     <Compile Include="Assets\Scripts\Platform Scripts\FlipPlatformScript.cs" />
+    <Compile Include="Assets\Scripts\Platform Scripts\OnJumpScript.cs" />
     <Compile Include="Assets\Scripts\Platform Scripts\PlatformMoverScript.cs" />
     <Compile Include="Assets\Scripts\Platform Scripts\PlatformScript.cs" />
     <Compile Include="Assets\Scripts\Platform Scripts\TrampolineScript.cs" />

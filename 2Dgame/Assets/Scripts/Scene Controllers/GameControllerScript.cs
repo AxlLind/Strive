@@ -19,6 +19,7 @@ public class GameControllerScript : MonoBehaviour {
 	public int score;
 
 	public GameObject pauseScreen;
+    public GameObject pauseButton;
 	public GameObject scoreOnGameOver;
 	public InputField nameInput;
 	public Button sendHighscore;
@@ -80,9 +81,18 @@ public class GameControllerScript : MonoBehaviour {
 		playerRB.simulated = isPaused ? false : true;
 	}
 
-	// Button press-methods
+    public IEnumerator PauseForSeconds(float seconds)
+    {
+        pauseButton.SetActive(false);
+        PauseUnPauseGame();
+        yield return new WaitForSeconds(seconds);
+        PauseUnPauseGame();
+        pauseButton.SetActive(true);
+    }
 
-	public void OnClickPause(Image img) {
+    // Button press-methods
+
+    public void OnClickPause(Image img) {
 		img.overrideSprite = isPaused ? pauseSprite : playSprite;
 		pauseScreen.SetActive( !isPaused );
 		PauseUnPauseGame ();
