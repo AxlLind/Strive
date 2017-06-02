@@ -30,6 +30,7 @@ public class PlatformSpawnerScript : MonoBehaviour {
 
 	/**
 	 * Spawns a random platform type at a random x-position.
+     * Only queues if the queue is empty.
 	 */
 	void spawnPlatform() {
         if (prefabqueue.Count == 0)
@@ -49,7 +50,7 @@ public class PlatformSpawnerScript : MonoBehaviour {
 	 * 		10% chance moving
 	 */ 
 	void basicPlatformScheme() {
-        PlatformScheme(0, 0, 0, 0, 100);
+        PlatformScheme(80, 10, 10);
 	}
 
     /**
