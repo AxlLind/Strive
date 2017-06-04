@@ -16,11 +16,6 @@ public class PlatformMoverScript : PlatformScript {
         base.Awake();
     }
 
-   
-    new void FixedUpdate () {
-		base.FixedUpdate ();
-	}
-
     /**
     * Moves the platform between the edges of the screen.
     * Starts in a random direction.
