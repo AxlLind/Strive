@@ -8,7 +8,7 @@ public abstract class OnJumpScript : PlatformScript {
 
     protected new void Awake()
     {
-        notJumpedOn = false;
+        notJumpedOn = true;
         base.Awake();
     }
 

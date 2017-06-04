@@ -43,7 +43,7 @@ public class BlinkingPlatformScript : OnJumpScript {
     protected override void OnJump()
     {
         GameObject[] blinkers = GameObject.FindGameObjectsWithTag("Blinker");
-        StartCoroutine(gcs.PauseForSeconds(2));
+        StartCoroutine(gcs.PauseForSeconds(1.2f));
         foreach (GameObject blinker in blinkers)
         {
             float distance = blinker.transform.position.y - this.transform.position.y;
