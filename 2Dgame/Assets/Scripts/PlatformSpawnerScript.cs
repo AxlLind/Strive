@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlatformSpawnerScript : MonoBehaviour {
 
 	float yPosAtLastSpawn = 5f;
-	float lastXPos = 0;
+	int lastXPos = 0;
     Queue prefabqueue;
 
     public float distanceBetween = 3.2f;
@@ -38,9 +38,15 @@ public class PlatformSpawnerScript : MonoBehaviour {
             choosePlatform();
         }
         GameObject platformType = (GameObject) prefabqueue.Dequeue();
-		Vector2 pos = new Vector2(correctX(), yPosAtLastSpawn + distanceBetween + 15f);
+        float yPos = yPosAtLastSpawn + distanceBetween + 15f;
+        Vector2 pos = new Vector2(correctX(), yPos);
         GameObject go = Instantiate(platformType, pos, Quaternion.identity);
-		go.transform.parent = platformParent;
+        go.transform.parent = platformParent;
+
+        if (Random.Range(0, 100) < 40)
+        {
+            SpawnSecond(platformType, yPos);
+        }
 	}
 
 	/**
@@ -134,4 +140,32 @@ public class PlatformSpawnerScript : MonoBehaviour {
 		lastXPos = x;
 		return x;
 	}
+
+    /**
+     * Spawns a second platform at the same yPostion if 
+     * all the criterias are met.
+     */
+    void SpawnSecond(GameObject platform, float yPosition)
+    {
+        if (platform.Equals(platformPrefabs[0]) || platform.Equals(platformPrefabs[2]))
+        {
+            if (Camera.main.transform.position.y < 500)
+            {
+                Vector2 pos = new Vector2(XValue(lastXPos), yPosition);
+                Instantiate(platformPrefabs[0], pos, Quaternion.identity);
+            }
+        }
+    }
+
+
+    int XValue(int otherX)
+    {
+        int x = correctX();
+        while (x >= otherX - 4 && x <= otherX + 4)
+        {
+            x = correctX();
+        }
+
+        return x;
+    }
 }
