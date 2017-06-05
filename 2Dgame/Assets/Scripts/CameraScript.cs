@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CameraScript : MonoBehaviour {
 
-	float standardSpeed = 5.4f;
+	float standardSpeed;
 	float scrollSpeed;
 
 	public Rigidbody2D target;
@@ -23,12 +23,43 @@ public class CameraScript : MonoBehaviour {
 	 * Uses linear interpolation to make this switch in speed feel smooth.
 	 */
 	void ScrollUp() {
-		transform.position = new Vector3 (transform.position.x, transform.position.y + scrollSpeed*Time.deltaTime, transform.position.z);
+        StandardSpeed();
 
-		if (target.position.y - transform.position.y > 5f) {
-			scrollSpeed = Mathf.Lerp (scrollSpeed, target.velocity.y, 0.1f);
-		} else {
-			scrollSpeed = Mathf.Lerp(scrollSpeed, standardSpeed, 2f);
-		}
+        if (target.position.y - transform.position.y > 3f)
+        {
+            scrollSpeed = Mathf.Lerp(scrollSpeed, target.velocity.y, LerpSpeed());
+        }
+        else
+        {
+            scrollSpeed = Mathf.Lerp(scrollSpeed, standardSpeed, LerpSpeed());
+        }
+
+        transform.position = new Vector3 (transform.position.x, transform.position.y + scrollSpeed * Time.deltaTime, transform.position.z);
 	}
+
+    /**
+     * Scrolls up in different speeds, depending on score.
+     * To make the start easier.
+     */
+    void StandardSpeed()
+    {
+        if (transform.position.y < 200)
+        {
+            standardSpeed = 2f;
+        }
+        else if (transform.position.y < 500)
+        {
+            standardSpeed = 4f;
+        }
+        else
+        {
+            standardSpeed = 5.4f;
+        }
+    }
+
+    float LerpSpeed()
+    {
+        float distance = Mathf.Abs(target.position.y - transform.position.y);
+        return (distance / 100) * 0.1f * distance;
+    }
 }

@@ -123,7 +123,7 @@ public class PlatformSpawnerScript : MonoBehaviour {
 
 	/**
 	 * Returns a random x-position to spawn a platform at.
-	 * Makes two platforms in the same position twice in a row
+	 * Makes two platforms in the same position twice
 	 * in a row less likely, though not impossible
 	 */
 	int correctX() {
