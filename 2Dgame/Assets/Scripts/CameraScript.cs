@@ -57,6 +57,9 @@ public class CameraScript : MonoBehaviour {
         }
     }
 
+    /**
+     * Lerps faster the farther away from the middle the player is.
+     */
     float LerpSpeed()
     {
         float distance = Mathf.Abs(target.position.y - transform.position.y);

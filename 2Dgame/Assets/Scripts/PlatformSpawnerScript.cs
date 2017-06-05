@@ -42,11 +42,7 @@ public class PlatformSpawnerScript : MonoBehaviour {
         Vector2 pos = new Vector2(correctX(), yPos);
         GameObject go = Instantiate(platformType, pos, Quaternion.identity);
         go.transform.parent = platformParent;
-
-        if (Random.Range(0, 100) < 40)
-        {
-            SpawnSecond(platformType, yPos);
-        }
+        SpawnSecond(platformType, yPos);
 	}
 
 	/**
@@ -133,9 +129,9 @@ public class PlatformSpawnerScript : MonoBehaviour {
 	 * in a row less likely, though not impossible
 	 */
 	int correctX() {
-		int x = 2 * Random.Range (-3, 4);
+        int x = Random.Range(-6, 7);
 		if (x == lastXPos) {
-			x = 2 * Random.Range (-3, 4);
+            x = Random.Range(-6, 7);
 		}
 		lastXPos = x;
 		return x;
@@ -144,28 +140,35 @@ public class PlatformSpawnerScript : MonoBehaviour {
     /**
      * Spawns a second platform at the same yPostion if 
      * all the criterias are met.
+     * 
+     * Currently 60 percent chance to spawn a second one.
      */
     void SpawnSecond(GameObject platform, float yPosition)
     {
-        if (platform.Equals(platformPrefabs[0]) || platform.Equals(platformPrefabs[2]))
+        if (Random.Range(0, 100) < 60)
         {
-            if (Camera.main.transform.position.y < 500)
+            if (platform.Equals(platformPrefabs[0]) || platform.Equals(platformPrefabs[2]))
             {
-                Vector2 pos = new Vector2(XValue(lastXPos), yPosition);
-                Instantiate(platformPrefabs[0], pos, Quaternion.identity);
+                if (Camera.main.transform.position.y < 500)
+                {
+                    Vector2 pos = new Vector2(Xvalue(lastXPos), yPosition);
+                    Instantiate(platformPrefabs[0], pos, Quaternion.identity);
+                }
             }
         }
     }
 
-
-    int XValue(int otherX)
+    /**
+     * Sets the spawnposition for the other platform.
+     * There is always at least two world units between them.
+     */
+    int Xvalue(int otherX)
     {
-        int x = correctX();
-        while (x >= otherX - 4 && x <= otherX + 4)
+        if (otherX - 6 < -6)
         {
-            x = correctX();
+            return Random.Range(otherX + 6, 7);
         }
 
-        return x;
+        return Random.Range(-6, otherX - 6);
     }
 }

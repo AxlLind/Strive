@@ -45,7 +45,7 @@ public class PlayerScript : MonoBehaviour {
 		#endif
 
 		float flipped = (GameControllerScript.straight == false) ? -1 : 1;
-		rb.velocity = new Vector2 (flipped * h * horizontalSpeed,rb.velocity.y);
+		rb.velocity = new Vector2 (flipped * h * horizontalSpeed, rb.velocity.y);
 	}
 
     /**
