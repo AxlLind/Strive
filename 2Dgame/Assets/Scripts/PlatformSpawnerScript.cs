@@ -145,16 +145,10 @@ public class PlatformSpawnerScript : MonoBehaviour {
      */
     void SpawnSecond(GameObject platform, float yPosition)
     {
-        if (Random.Range(0, 100) < 60)
+        if (Camera.main.transform.position.y < 500 && (platform.Equals(platformPrefabs[0]) || platform.Equals(platformPrefabs[2])) && Random.Range(0, 100) < 60)
         {
-            if (platform.Equals(platformPrefabs[0]) || platform.Equals(platformPrefabs[2]))
-            {
-                if (Camera.main.transform.position.y < 500)
-                {
-                    Vector2 pos = new Vector2(Xvalue(lastXPos), yPosition);
-                    Instantiate(platformPrefabs[0], pos, Quaternion.identity);
-                }
-            }
+            Vector2 pos = new Vector2(Xvalue(lastXPos), yPosition);
+            Instantiate(platformPrefabs[0], pos, Quaternion.identity);
         }
     }
 
