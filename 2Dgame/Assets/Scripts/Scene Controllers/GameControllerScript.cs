@@ -35,6 +35,8 @@ public class GameControllerScript : MonoBehaviour {
 	public TextMesh highscoreText;
 	public Transform scoreLine;
 
+    public AudioSource music;
+
 	void Start() {
 		#if (UNITY_ANDROID || UNITY_IOS)
 		Screen.sleepTimeout = SleepTimeout.NeverSleep;
@@ -95,6 +97,16 @@ public class GameControllerScript : MonoBehaviour {
     public void OnClickPause(Image img) {
 		img.overrideSprite = isPaused ? pauseSprite : playSprite;
 		pauseScreen.SetActive( !isPaused );
+
+        if (isPaused)
+        {
+            music.Play();
+        }
+        else
+        {
+            music.Pause();
+        }
+
 		PauseUnPauseGame ();
 	}
 
