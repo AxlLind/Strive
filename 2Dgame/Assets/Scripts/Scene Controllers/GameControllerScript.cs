@@ -98,7 +98,7 @@ public class GameControllerScript : MonoBehaviour {
 		img.overrideSprite = isPaused ? pauseSprite : playSprite;
 		pauseScreen.SetActive( !isPaused );
 
-        if (isPaused)
+        if (isPaused && musicOn)
         {
             music.Play();
         }
