@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlatformSpawnerScript : MonoBehaviour {
 
 	float yPosAtLastSpawn = 5f;
-	float lastXPos = 0;
+	int lastXPos = 0;
     Queue prefabqueue;
 
     public float distanceBetween = 3.2f;
@@ -38,9 +38,11 @@ public class PlatformSpawnerScript : MonoBehaviour {
             choosePlatform();
         }
         GameObject platformType = (GameObject) prefabqueue.Dequeue();
-		Vector2 pos = new Vector2(correctX(), yPosAtLastSpawn + distanceBetween + 15f);
+        float yPos = yPosAtLastSpawn + distanceBetween + 15f;
+        Vector2 pos = new Vector2(correctX(), yPos);
         GameObject go = Instantiate(platformType, pos, Quaternion.identity);
-		go.transform.parent = platformParent;
+        go.transform.parent = platformParent;
+        SpawnSecond(platformType, yPos);
 	}
 
 	/**
@@ -123,15 +125,47 @@ public class PlatformSpawnerScript : MonoBehaviour {
 
 	/**
 	 * Returns a random x-position to spawn a platform at.
-	 * Makes two platforms in the same position twice in a row
+	 * Makes two platforms in the same position twice
 	 * in a row less likely, though not impossible
 	 */
 	int correctX() {
-		int x = 2 * Random.Range (-3, 4);
+        int x = 2 * Random.Range(-3, 4);
 		if (x == lastXPos) {
-			x = 2 * Random.Range (-3, 4);
+            x = 2 * Random.Range(-3, 4);
 		}
 		lastXPos = x;
 		return x;
 	}
+
+    /**
+     * Spawns a second platform at the same yPostion if 
+     * all the criterias are met.
+     * 
+     * Chance to spawn a second one decreases with score
+     */
+    void SpawnSecond(GameObject platform, float yPosition)
+    {
+        float yPos = Camera.main.transform.position.y;
+        int chance = yPos < 250 ? 60 : 30;
+
+        if (yPos < 400 && (platform.Equals(platformPrefabs[0]) || platform.Equals(platformPrefabs[2])) && Random.Range(0, 100) < chance)
+        {
+            Vector2 pos = new Vector2(Xvalue(lastXPos), yPosition);
+            Instantiate(platformPrefabs[0], pos, Quaternion.identity);
+        }
+    }
+
+    /**
+     * Sets the spawnposition for the other platform.
+     * There is always at least two world units between them.
+     */
+    int Xvalue(int otherX)
+    {
+        if (otherX < 0)
+        {
+            return 2 * Random.Range(otherX / 2 + 3, 4);
+        }
+
+        return 2 * Random.Range(-3, otherX / 2 - 2);
+    }
 }
