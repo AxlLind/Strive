@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.Advertisements;
 
 public class DeathScript : MonoBehaviour {
 
@@ -14,9 +15,15 @@ public class DeathScript : MonoBehaviour {
 	/**
 	 * Called when the player touches this object and thereby losing the game.
 	 * Activates the game over window and 'pauses' the game.
+     * 
+     * Shows an ad before showing the gameOverScreen.
 	 */
 	void OnTriggerEnter2D(Collider2D other) {
-		// Called when player loses:
+        if (Advertisement.IsReady())
+        {
+            Advertisement.Show();
+        }
+
 		gameOverScreen.SetActive(true);
 		pauseButton.SetActive (false);
 
