@@ -129,9 +129,9 @@ public class PlatformSpawnerScript : MonoBehaviour {
 	 * in a row less likely, though not impossible
 	 */
 	int correctX() {
-        int x = Random.Range(-6, 7);
+        int x = 2 * Random.Range(-3, 4);
 		if (x == lastXPos) {
-            x = Random.Range(-6, 7);
+            x = 2 * Random.Range(-3, 4);
 		}
 		lastXPos = x;
 		return x;
@@ -141,11 +141,14 @@ public class PlatformSpawnerScript : MonoBehaviour {
      * Spawns a second platform at the same yPostion if 
      * all the criterias are met.
      * 
-     * Currently 60 percent chance to spawn a second one.
+     * Chance to spawn a second one decreases with score
      */
     void SpawnSecond(GameObject platform, float yPosition)
     {
-        if (Camera.main.transform.position.y < 500 && (platform.Equals(platformPrefabs[0]) || platform.Equals(platformPrefabs[2])) && Random.Range(0, 100) < 60)
+        float yPos = Camera.main.transform.position.y;
+        int chance = yPos < 250 ? 60 : 30;
+
+        if (yPos < 400 && (platform.Equals(platformPrefabs[0]) || platform.Equals(platformPrefabs[2])) && Random.Range(0, 100) < chance)
         {
             Vector2 pos = new Vector2(Xvalue(lastXPos), yPosition);
             Instantiate(platformPrefabs[0], pos, Quaternion.identity);
@@ -158,11 +161,11 @@ public class PlatformSpawnerScript : MonoBehaviour {
      */
     int Xvalue(int otherX)
     {
-        if (otherX - 6 < -6)
+        if (otherX < 0)
         {
-            return Random.Range(otherX + 6, 7);
+            return 2 * Random.Range(otherX / 2 + 3, 4);
         }
 
-        return Random.Range(-6, otherX - 6);
+        return 2 * Random.Range(-3, otherX / 2 - 2);
     }
 }
