@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.Advertisements;
 using Firebase;
 using Firebase.Unity.Editor;
 using Firebase.Database;
@@ -36,8 +37,11 @@ public class GameControllerScript : MonoBehaviour {
 	public Transform scoreLine;
 
 	void Start() {
-		#if (UNITY_ANDROID || UNITY_IOS)
-		Screen.sleepTimeout = SleepTimeout.NeverSleep;
+        // Initialize ads
+        Advertisement.Initialize("1439959");
+
+        #if (UNITY_ANDROID || UNITY_IOS)
+        Screen.sleepTimeout = SleepTimeout.NeverSleep;
 		#endif
 		sendHighscore.interactable = true;
         straight = true;
