@@ -52,9 +52,6 @@
     <Reference Include="UnityEngine">
       <HintPath>Library\UnityAssemblies\UnityEngine.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.Advertisements">
-      <HintPath>Library\UnityAssemblies\UnityEngine.Advertisements.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>Library\UnityAssemblies\UnityEngine.UI.dll</HintPath>
     </Reference>
@@ -104,8 +101,10 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\CameraScript.cs" />
     <Compile Include="Assets\Scripts\DeathScript.cs" />
+    <Compile Include="Assets\Scripts\EventSpawnerScript.cs" />
     <Compile Include="Assets\Scripts\Highscore.cs" />
     <Compile Include="Assets\Scripts\MenuPlayerScript.cs" />
+    <Compile Include="Assets\Scripts\MirrorImageScript.cs" />
     <Compile Include="Assets\Scripts\MusicPlayerScript.cs" />
     <Compile Include="Assets\Scripts\Platform Scripts\BlinkerScript.cs" />
     <Compile Include="Assets\Scripts\Platform Scripts\BlinkingPlatformScript.cs" />

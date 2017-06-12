@@ -166,8 +166,7 @@ public class GameControllerScript : MonoBehaviour {
 		return ((long) a) << 32 + b;
 	}
 
-	// Button press-methods
-
+	// Mechanics
 
     /**
      * Rotates the camera smooooth
