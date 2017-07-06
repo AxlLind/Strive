@@ -101,7 +101,6 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\CameraScript.cs" />
     <Compile Include="Assets\Scripts\DeathScript.cs" />
-    <Compile Include="Assets\Scripts\EventSpawnerScript.cs" />
     <Compile Include="Assets\Scripts\Highscore.cs" />
     <Compile Include="Assets\Scripts\MenuPlayerScript.cs" />
     <Compile Include="Assets\Scripts\MirrorImageScript.cs" />
@@ -109,6 +108,7 @@
     <Compile Include="Assets\Scripts\Platform Scripts\BlinkerScript.cs" />
     <Compile Include="Assets\Scripts\Platform Scripts\BlinkingPlatformScript.cs" />
     <Compile Include="Assets\Scripts\Platform Scripts\FlipPlatformScript.cs" />
+    <Compile Include="Assets\Scripts\Platform Scripts\MirrorImagePlatformScript.cs" />
     <Compile Include="Assets\Scripts\Platform Scripts\OnJumpScript.cs" />
     <Compile Include="Assets\Scripts\Platform Scripts\PlatformMoverScript.cs" />
     <Compile Include="Assets\Scripts\Platform Scripts\PlatformScript.cs" />
