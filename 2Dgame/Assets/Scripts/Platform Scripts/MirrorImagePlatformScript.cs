@@ -16,17 +16,15 @@ public class MirrorImagePlatformScript : OnJumpScript {
 
     protected override void OnJump()
     {
-        SpawnMirrorImages(5);
+        SpawnMirrorImages(2);
     }
     
     private void SpawnMirrorImages(int numberOf)
     {
-        GameObject[] mirrorImages = new GameObject[numberOf * 2];
         float gameWidth = 16f;
         for (int i = 0; i < numberOf * 2; i++)
         {
-            GameObject go = Instantiate(mirrorImage, new Vector2(-gameWidth - playerPos.position.x + ((gameWidth / numberOf) * i), 0), Quaternion.identity);
-            mirrorImages[i] = go;
+            Instantiate(mirrorImage, new Vector2(-gameWidth - (playerPos.position.x) + ((gameWidth / numberOf) * i), playerPos.position.y), Quaternion.identity);
         }
     }
 }
