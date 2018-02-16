@@ -6,8 +6,8 @@ Developed by Axel Lindeberg and Jonatan Cerwall. Music by Pontus Mjöberg.
 #### Screenshots
 |                |                |
 | :------------- | :------------- |
-| ![StartScreen](./Screenshots/StartScreen.png "")| ![GameScreen1](./Screenshots/GameScreen1.png "") |
-![GameScreen2](./Screenshots/GameScreen2.png "") | ![HighScoreList](./Screenshots/HighScoreList.png "") |
+| ![StartScreen](./screenshots/StartScreen.png)| ![GameScreen1](./screenshots/GameScreen1.png) |
+![GameScreen2](./screenshots/GameScreen2.png) | ![HighScoreList](./screenshots/HighScoreList.png) |
 
 
 #### How to install
