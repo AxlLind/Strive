@@ -1,18 +1,19 @@
 # JumperGame
-This is a infinite jumper game. The theme idea is
-8-bit graphics and sound. It is made using Unity and written in C#. The main
-platform for the game is mobile, both android and iOS, using the gyroscope
-accelerometer for controls.
+This is a infinite jumper game. The theme idea is 8-bit graphics and sound. It is made using Unity and written in C#. The main platform for the game is mobile, both android and iOS, using the gyroscope accelerometer for controls.
 
 Developed by Axel Lindeberg and Jonatan Cerwall. Music by Pontus Mjöberg.
 
-#### How to install
-For android the process is quite easy. Simply download the [apk
-here](https://github.com/AxlLind/2D-platformer/raw/master/JumperGame.apk) and
-open the file on your phone.
+#### Screenshots
+|                |                |
+| :------------- | :------------- |
+| ![StartScreen](./Screenshots/StartScreen.png "")| ![GameScreen1](./Screenshots/GameScreen1.png "") |
+![GameScreen2](./Screenshots/GameScreen2.png "") | ![HighScoreList](./Screenshots/HighScoreList.png "") |
 
-Since we do not have an apple developer license we cannot distribute an iOS
-version of this project.
+
+#### How to install
+For android the process is quite easy. Simply download the [apk here](https://github.com/AxlLind/2D-platformer/raw/master/JumperGame.apk) and open the file on your phone.
+
+Since we do not have an apple developer license we cannot distribute an iOS version of this project.
 
 #### Testing Strategy
 Since we are using unity in this project we are continually testing everything we do. Doing traditional Unit Testing is not optimal for this kind of project, since the methods we write all work within Unity's physics and graphics engine. Our testing will still be extensive, but will consist of us playing the game (and possibly outside testers).
